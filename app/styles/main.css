@@ -2,17 +2,19 @@
 body {
     font: 62.5% "Lucida Grande", Tahoma, Verdana, sans-serif;
     margin: 0;
-
     -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: -moz-none;
+         -o-user-select: none;
+            user-select: none;
 }
 
 #tipper {
     display: block;
-    padding: 15px;
+    position: relative;
+    /*height: 95.8%;*/
+    width: 92%;
+    padding: 4.1%;
     background: #3d4543;
     background-image: -webkit-linear-gradient(top, #3d4543, #2f2a2f);
     background-image: -moz-linear-gradient(top, #3d4543, #2f2a2f);
@@ -23,6 +25,12 @@ body {
 
 section {
 	position:relative;
+    overflow: hidden;
+}
+
+.label {
+    color: white;
+    margin-left: 1px;
 }
 
 .display {
@@ -75,19 +83,22 @@ section {
 /*
     -webkit-box-shadow:inset 0 2px 8px rgba(0,0,0,0.15);
 */
-    overflow:hidden;
-    margin-top: 1.6em;
-    margin-left: 2%;
+    position: relative;
+    bottom: 2em;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 30px;
 }
 
 .btn {
     font: 2em "Ubuntu Mono", monospace;
     padding: 0.6em 0;
     float: left;
-	width: 31%;
+	width: 32%;
 	height: 24px;
     color: white;
 	text-align: center;
+    vertical-align: middle;
     text-decoration: none;
     text-shadow:0 1px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(0, 0, 0, 0.8);
@@ -96,7 +107,7 @@ section {
     background-clip: padding-box !important;    
     cursor: pointer;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);    
-    margin: 2% 1.6% 0% 0%;
+    margin: 2% 0% 0% 0%;
     background-image: -webkit-linear-gradient(top, #313131, #1c1c1c);
     background-image: linear-gradient(top, #313131, #1c1c1c);
 }
@@ -104,7 +115,11 @@ section {
 .btn:active {
   background: #282828;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.btn.center {
+    margin: 2% 1% 0% 1%;
 }
 
 .btn-gray {
@@ -129,4 +144,49 @@ section {
 
 .btn-red:active {
   background: #ff4561;
+}
+
+.btn-yellow {
+  background: #ffa70c;
+  background-image: -webkit-linear-gradient(top, #ffc557, #ffa70c);
+  background-image: -moz-linear-gradient(top, #ffc557, #ffa70c);
+  background-image: -o-linear-gradient(top, #ffc557, #ffa70c);
+  background-image: linear-gradient(to bottom, #ffc557, #ffa70c);
+}
+
+.btn-yellow:active {
+  background: #ffa70c;
+}
+
+.btn-blue {
+  background: #007bff;
+  background-image: -webkit-linear-gradient(top, #49a1ff, #007bff);
+  background-image: -moz-linear-gradient(top, #49a1ff, #007bff);
+  background-image: -o-linear-gradient(top, #49a1ff, #007bff);
+  background-image: linear-gradient(to bottom, #49a1ff, #007bff);
+}
+
+.btn-blue:active {
+  background: #007bff;
+}
+
+.btn-block {
+    width: 99%;
+}
+
+.icon {
+    pointer-events: none;
+    line-height: 14px;
+    vertical-align: text-top;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-top: 4px;
+    background-image: url("../images/glyphicons-halflings-white.png");
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+}
+
+.icon-user {
+    background-position: -168px 0;
 }

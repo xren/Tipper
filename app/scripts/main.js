@@ -3,10 +3,11 @@ require.config({
   },
 
   paths: {
-    jquery: 'vendor/jquery.min'
+    jquery: 'vendor/jquery.min',
+    backbone: '../components/backbone/backbone-min',
+    underscore: '../components/underscore/underscore-min'
   }
 });
-require(['app'], function(app) {
-  // use app here
-//  console.log(app);
+require(['app'], function(module) {
+	var app = new module;
 });
