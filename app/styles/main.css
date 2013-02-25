@@ -2,6 +2,7 @@
 body {
     font: 62.5% "Lucida Grande", Tahoma, Verdana, sans-serif;
     margin: 0;
+    -webkit-text-size-adjust: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
        -moz-user-select: -moz-none;
@@ -11,8 +12,8 @@ body {
 
 #tipper {
     display: block;
-    position: relative;
-    /*height: 95.8%;*/
+    position: relative;b
+    /*height: 80.9%;*/
     width: 92%;
     padding: 4.1%;
     background: #3d4543;
@@ -87,12 +88,12 @@ section {
     bottom: 2em;
     width: 100%;
     overflow: hidden;
-    margin-top: 30px;
+    margin-top: 35px;
 }
 
 .btn {
     font: 2em "Ubuntu Mono", monospace;
-    padding: 0.6em 0;
+    padding: 0.7em 0;
     float: left;
 	width: 32%;
 	height: 24px;
@@ -190,3 +191,13 @@ section {
 .icon-user {
     background-position: -168px 0;
 }
+
+
+/* For iPhone < 5 */
+@media only screen and (device-aspect-ratio: 2/3) {
+    .btn {
+        padding-top: 0.4em;
+        padding-bottom: 0.4em;
+    }
+}
+
