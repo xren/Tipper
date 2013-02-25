@@ -4,7 +4,7 @@ require.config({
 
   paths: {
     jquery: 'vendor/jquery.min',
-    backbone: '../components/backbone/backbone-min',
+    backbone: 'vendor/backbone-min',
     underscore: '../components/underscore/underscore-min',
   	add2home: 'vendor/add2home'
   }

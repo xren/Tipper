@@ -13,16 +13,20 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon.png" />
-        
+
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/add2home.css">
         <script src="scripts/vendor/modernizr.min.js"></script>
+        <script src="scripts/vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/underscore-min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/backbone-min.js"></script>
+
     </head>
     <body>
         <artical id="tipper">
             <section>
                 <div class="display" data-role="input">
-                    <i class="label pull-left">PRE-TAX AMOUNT</i>
+                    <i class="label pull-left">PRE-TIP AMOUNT</i>
                     <p>0</p>
                 </div>
             <!--        <aside class="display-aid">15%</aside>-->
@@ -58,7 +62,6 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->        
-        <script src="scripts/vendor/jquery.min.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script type="text/javascript">

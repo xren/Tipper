@@ -1,4 +1,4 @@
-define(['underscore', 'backbone'], function() {
+define([], function() {
 	var TipperView = Backbone.View.extend({
 	    	el: $('#tipper'),
 	        events: {
