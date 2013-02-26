@@ -15,8 +15,8 @@ define([], function() {
 	        	this.on('updateinput', this.onInputUpate);
 	        	this.on('updateoutput', this.onOutputUpdate);
 	        	this.on('reset', this.onReset);
-	        	$('#tipper').on('touchmove', this.stopScrolling);
-	        	$('#tipper').on('touchstart', this.stopScrolling);
+	        	this.el.on('touchmove', this.stopScrolling);
+	        	this.el.on('touchstart', this.stopScrolling);
 	        },
 
 	        hideAddressBar: function() {
