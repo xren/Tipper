@@ -133,9 +133,11 @@ section {
 
 .btn-gray:active {
   background: #555;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-.btn-red {
+.btn-pink {
   background: #ff4561;
   background-image: -webkit-linear-gradient(top, #ff7286, #ff4561);
   background-image: -moz-linear-gradient(top, #ff7286, #ff4561);
@@ -143,8 +145,24 @@ section {
   background-image: linear-gradient(to bottom, #ff7286, #ff4561);
 }
 
-.btn-red:active {
+.btn-pink:active {
   background: #ff4561;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.btn-red {
+  background: #ff4848;
+  background-image: -webkit-linear-gradient(top, #ff7c7c, #ff4848);
+  background-image: -moz-linear-gradient(top, #ff7c7c, #ff4848);
+  background-image: -o-linear-gradient(top, #ff7c7c, #ff4848);
+  background-image: linear-gradient(to bottom, #ff7c7c, #ff4848);
+}
+
+.btn-red:active {
+  background: #ff4848;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .btn-yellow {
@@ -169,13 +187,24 @@ section {
 
 .btn-blue:active {
   background: #007bff;
-}
-
-.btn-blue.updating {
-  background: #007bff;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
           box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
+
+.updating {
+  background: #00adff;
+  background-image: -webkit-linear-gradient(top, #45c3ff, #00adff);
+  background-image: -moz-linear-gradient(top, #45c3ff, #00adff);
+  background-image: -o-linear-gradient(top, #45c3ff, #00adff);
+  background-image: linear-gradient(to bottom, #45c3ff, #00adff);
+}
+
+.updating:active {
+  background: #00adff;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
 
 .btn-block {
     width: 99%;

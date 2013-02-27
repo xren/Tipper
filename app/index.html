@@ -25,7 +25,7 @@
 
     </head>
     <body>
-        <artical id="tipper">
+        <artical id="tipper" style="display: none;">
             <section>
                 <div class="display" data-role="input">
                     <i class="label pull-left">PRE-TIP AMOUNT</i>
@@ -42,21 +42,22 @@
                 <div class="btn btn-gray" data-role="tip" data-percentage="15">15%</div>
                 <div class="btn center btn-gray" data-role="tip" data-percentage="18">18%</div>
                 <div class="btn btn-gray" data-role="tip" data-percentage="20">20%</div>
-                <div class="btn btn-gray" data-role="split" data-splits="1">1<i class="icon icon-user"></i></div>
-                <div class="btn center btn-gray" data-role="split" data-splits="2">2<i class="icon icon-user"></i></div>
-                <div class="btn btn-gray" data-role="split" data-splits="3">3<i class="icon icon-user"></i></div>
-                <div class="btn" data-role="num" data-num="1">1</div>
-                <div class="btn center" data-role="num" data-num="2">2</div>
-                <div class="btn" data-role="num" data-num="3">3</div>
-                <div class="btn" data-role="num" data-num="4">4</div>
-                <div class="btn center" data-role="num" data-num="5">5</div>
-                <div class="btn" data-role="num" data-num="6">6</div>
-                <div class="btn" data-role="num" data-num="7">7</div>
-                <div class="btn center" data-role="num" data-num="8">8</div>
-                <div class="btn" data-role="num" data-num="9">9</div>
-                <div class="btn" data-role="pt" data-num=".">.</div>
-                <div class="btn center" data-role="num" data-num="0">0</div>
-                <div class="btn btn-yellow" data-role="clear" data-num="C">C</div>
+                <div class="btn btn-gray btn-blue" data-role="split" data-splits="1" data-update="target">1<i class="icon icon-user"></i></div>
+                <div class="btn center btn-gray" data-role="split" data-splits="2" data-update="target">2<i class="icon icon-user"></i></div>
+                <div class="btn btn-gray" data-role="split" data-splits="3" data-update="target">3<i class="icon icon-user"></i></div>
+                <div class="btn" data-role="num" data-num="1" data-update="input">1</div>
+                <div class="btn center" data-role="num" data-num="2" data-update="input">2</div>
+                <div class="btn" data-role="num" data-num="3" data-update="input">3</div>
+                <div class="btn" data-role="num" data-num="4" data-update="input">4</div>
+                <div class="btn center" data-role="num" data-num="5" data-update="input">5</div>
+                <div class="btn" data-role="num" data-num="6" data-update="input">6</div>
+                <div class="btn" data-role="num" data-num="7" data-update="input">7</div>
+                <div class="btn center" data-role="num" data-num="8" data-update="input">8</div>
+                <div class="btn" data-role="num" data-num="9" data-update="input">9</div>
+                <div class="btn" data-role="pt" data-num="." data-update="hide">.</div>
+                <div class="btn btn-blue" data-role="updateconfirm" hidden data-update="confirm">Okay</div>
+                <div class="btn center" data-role="num" data-num="0" data-update="input">0</div>
+                <div class="btn btn-yellow" data-role="clear" data-num="C" data-update="input">C</div>
             </section>
         </artical>
 

@@ -17,7 +17,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                         localStorage.setItem('splits', JSON.stringify(['1', '2', '3']));
                         localStorage.setItem('tips', JSON.stringify(['15', '18', '20']));
                         localStorage.setItem('current_tip', '1');
-                        localStorage.setItem('current_split', '0');
+                        // localStorage.setItem('current_split', '0');
                         localStorage.setItem('installed', self.version);
                     } else {
                             tips_data = JSON.parse(localStorage.getItem('tips')),
@@ -36,15 +36,11 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 }
 
                 // Initilize options
-                current_tip = parseInt(localStorage.getItem('current_tip')),
-                current_split = parseInt(localStorage.getItem('current_split')),
+                var current_tip = parseInt(localStorage.getItem('current_tip')),
+                    current_split = parseInt(localStorage.getItem('current_split'));
 
-                tips.removeClass('btn-red');
-                $(tips[current_tip]).addClass('btn-red');
-                
-                splits.removeClass('btn-blue');
-                $(splits[current_split]).addClass('btn-blue');
-
+                tips.removeClass('btn-pink');
+                $(tips[current_tip]).addClass('btn-pink');
 
                 self.hideAddressBar();
 
@@ -56,25 +52,69 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 $('#tipper').on('touchmove', this.stopScrolling);
                 $('#tipper').on('touchstart', this.stopScrolling);
 
-                $('.dailpad .btn[data-role="tip"]').hammer().on('touchstart', function(e) {self.tipButtonClicked(e);});
-                $('.dailpad .btn[data-role="split"]').hammer().on('touchstart hold', function(e) {self.splitButtonClicked(e);});
-                // $('.dailpad .btn[data-role="split"]').hammer().on('hold', function(e) {self.updateSplitOption(e);});
-                $('.dailpad .btn[data-role="num"]').hammer().on('touchstart', function(e) {self.numButtonClicked(e);});
-                $('.dailpad .btn[data-role="pt"]').hammer().on('touchstart', function(e) {self.ptButtonClicked(e);});
-                $('.dailpad .btn[data-role="clear"]').hammer().on('touchstart', function(e) {self.clearButtonClicked(e);});
+                $('.dailpad .btn[data-role="tip"]').hammer().on('tap', function(e) {self.tipButtonClicked(e);});
+                $('.dailpad .btn[data-role="split"]').hammer().on('tap hold', function(e) {self.splitButtonClicked(e);});
+                $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('tap', function(e) {self.confirmButtonClicked(e);});
+                $('.dailpad .btn[data-role="num"]').hammer().on('tap', function(e) {self.numButtonClicked(e);});
+                $('.dailpad .btn[data-role="pt"]').hammer().on('tap', function(e) {self.ptButtonClicked(e);});
+                $('.dailpad .btn[data-role="clear"]').hammer().on('tap', function(e) {self.clearButtonClicked(e);});
             },
 
             hideAddressBar: function() {
                 if (document.height <= window.outerHeight + 10) {
-                document.body.style.height = (window.outerHeight + 60) + 'px';
-                setTimeout(function() {window.scrollTo(0, 1);}, 50);
+                    document.body.style.height = (window.outerHeight + 60) + 'px';
+                    setTimeout(function() {window.scrollTo(0, 1);}, 50);
                 } else {
-                setTimeout(function() {window.scrollTo(0, 1);}, 0);
+                    setTimeout(function() {window.scrollTo(0, 1);}, 0);
                 }
             },
 
             stopScrolling: function(e) {
                 e.preventDefault();
+            },
+
+            confirmButtonClicked: function(e) {
+                if (!this.updating) {
+                    return;
+                }
+
+                var updateInputs = $('.dailpad .btn[data-update="input"]'),
+                    updateHide = $('.dailpad .btn[data-update="hide"]'),
+                    updateConfirm = $('.dailpad .btn[data-update="confirm"]'),
+                    updateTargets = $('.dailpad .btn[data-update="target"]'),
+                    me = $('.dailpad .btn[data-update="target"].updating'),
+                    splits = $('.dailpad .btn[data-role="split"]'),
+                    i = 0;
+
+                    // find the index of current me
+                    for (; i < updateTargets.length; i++) {
+                        if (updateTargets[i] === me[0]) {
+                            break;
+                        }
+                    }
+
+                if (me.hasClass('updating')) {
+                    var data = me[0].firstChild.data;
+                    if (!util.isNumber(data)) {
+                        data = JSON.parse(localStorage.getItem('splits'))[i];
+                        me[0].firstChild.data = data;
+                    } else {
+                        me.attr('data-splits', data);
+                        if (Modernizr.localstorage) {
+                            var split_data = JSON.parse(localStorage.getItem('splits'));
+                            split_data[i] = data;
+                            localStorage.setItem('splits', JSON.stringify(split_data));
+                        }
+                    }
+
+                    this.updating = false;
+                    me.removeClass('updating');
+                    updateInputs.removeClass('updating');
+                    updateHide.show();
+                    updateConfirm.hide();
+                }
+
+                this.trigger('updateoutput');                
             },
 
             ptButtonClicked: function(e) {
@@ -99,11 +139,10 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 
                 if (Modernizr.localstorage) {
                     localStorage.setItem('current_tip', i.toString());
-                    console.log(localStorage.getItem('current_tip'));
                 }
                 
-                $('.dailpad div.btn-red').removeClass('btn-red');
-                me.addClass('btn-red');
+                $('.dailpad div.btn-pink').removeClass('btn-pink');
+                me.addClass('btn-pink');
 
                 this.trigger('updateoutput');
             },
@@ -112,9 +151,9 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 var me = $(e.target),
                     num = me.attr('data-num');
 
-                if (me.hasClass('btn-blue')) {
+                if (me.hasClass('updating')) {
                     this.trigger('updatesplit', num);
-                } else if (me.hasClass('btn-red')) {
+                } else if (me.hasClass('btn-pink')) {
 
                 } else {
                     this.trigger('updateinput', num);
@@ -127,25 +166,37 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
             },
         
             splitButtonClicked: function(e) {
-                var me = $(e.target),
-                    numBtns = $('.dailpad div[data-role="num"]'),
-                    clearBtn = $('.btn[data-role="clear"]');
-
+                var me = $(e.target);
                 if (e.type === 'hold' && !this.updating) {  
-                    $('.dailpad div.btn-blue').removeClass('btn-blue');
-                    me.addClass('btn-blue');
-                    me.addClass('updating');
-                    numBtns.addClass('btn-blue');
-                    clearBtn.addClass('btn-blue');
-                    this.updating = true;
-                    me[0].firstChild.data = '_';
+                    var updateInputs = $('.dailpad .btn[data-update="input"]'),
+                        updateHide = $('.dailpad .btn[data-update="hide"]'),
+                        updateConfirm = $('.dailpad .btn[data-update="confirm"]'),
+                        splitButtons = $('.dailpad .btn[data-role="split"]');
+
+                    // If the updating one is not current highlighting, highlight current one
+                    if (!me.hasClass('btn-blue')) {
+                        splitButtons.removeClass('btn-blue');
+                        me.addClass('btn-blue');
+                    }
                     
-                } else if (e.type === 'touchstart') {
+                    // UI Change for updating                    
+                    me.addClass('updating');
+                    updateInputs.addClass('updating');
+                    updateHide.hide();
+                    updateConfirm.show();
+                    me[0].firstChild.data = '_';
+
+                    // Update status
+                    this.updating = true;
+                    
+                } else if (e.type === 'tap') {
                     var num = me.attr('data-splits');
                         currentOutput = $('.display[data-role="output"] p').text(),
+                        splitButtons = $('.dailpad .btn[data-role="split"]'),
                         splits = $('.dailpad .btn[data-role="split"]'),
                         i = 0;
 
+                    // find the index of current me
                     for (; i < splits.length; i++) {
                         if (splits[i] === me[0]) {
                             break;
@@ -153,9 +204,13 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                     }
 
                     if (this.updating) {
+                        var updateInputs = $('.dailpad .btn[data-update="input"]'),
+                            updateHide = $('.dailpad .btn[data-update="hide"]'),
+                            updateConfirm = $('.dailpad .btn[data-update="confirm"]');
+
                         if (me.hasClass('updating')) {
                             var data = me[0].firstChild.data;
-                            if (!isNumber(data)) {
+                            if (!util.isNumber(data)) {
                                 data = JSON.parse(localStorage.getItem('splits'))[i];
                                 me[0].firstChild.data = data;
                             } else {
@@ -169,46 +224,29 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
 
                             this.updating = false;
                             me.removeClass('updating');
-                            numBtns.removeClass('btn-blue');
-                            clearBtn.removeClass('btn-blue');
+                            updateInputs.removeClass('updating');
+                            updateHide.show();
+                            updateConfirm.hide();
                         }
-                        return;
-                    }
-
-                    if (Modernizr.localstorage) {
-                        localStorage.setItem('current_split', i.toString());
                     }
     
-                    $('.dailpad div.btn-blue').removeClass('btn-blue');
+                    splitButtons.removeClass('btn-blue');
                     me.addClass('btn-blue');
     
                     this.trigger('updateoutput');
                 }
-
-                function isNumber(n) {
-                    return !isNaN(parseFloat(n)) && isFinite(n);
-                }
-
             },
 
             updateInput: function(value) {
-                if (!isNumber(value)) return;
+                if (!util.isNumber(value)) return;
 
                 $('.display[data-role="input"] p').text(value);
                 this.trigger('updateoutput', value);
-
-                function isNumber(n) {
-                    return !isNaN(parseFloat(n)) && isFinite(n);
-                }
             },
 
             updateOutput: function(value) {
-                if (!isNumber(value)) return;
+                if (!util.isNumber(value)) return;
                 $('.display[data-role="output"] p').text(value);
-                
-                function isNumber(n) {
-                    return !isNaN(parseFloat(n)) && isFinite(n);
-                }
             },
 
             onInputUpate: function(value) {
@@ -221,7 +259,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                     }
                     currentInput = currentInput + value;
                 } else {
-                    if (!isInt(value)) {
+                    if (!util.isInt(value)) {
                         return;
                     }
 
@@ -245,15 +283,10 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 }
                 
                 this.updateInput(currentInput);
-
-                function isInt(n) {
-                    return n.valueOf() % 1 == 0 ? true: false;
-                }
-
             },
 
             onOutputUpdate: function() {
-                var percentage = parseInt($('.dailpad .btn-red[data-role="tip"]').attr('data-percentage'), 10) / 100,
+                var percentage = parseInt($('.dailpad .btn-pink[data-role="tip"]').attr('data-percentage'), 10) / 100,
                     splits = parseInt($('.dailpad .btn-blue[data-role="split"]').attr('data-splits'), 10),
                     currentInput = parseFloat($('.display[data-role="input"] p').text()),
                     valueNew = ((currentInput + currentInput * percentage) / splits).toFixed(2);
@@ -273,7 +306,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
             },
 
             onSplitUpdate: function(num) {
-                var target = $('.dailpad .btn-blue.updating'),
+                var target = $('.dailpad .btn[data-role="split"].updating'),
                     text = target[0].firstChild.data;
 
                 if (text.length > 1) {

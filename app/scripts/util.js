@@ -35,6 +35,29 @@
     			   + pad(date.getUTCHours()) + ':'
     			   + pad(date.getUTCMinutes()) + ':'
     			   + pad(date.getUTCSeconds()) + 'Z';
+    	},
+
+    	isNumber: function(n) {
+    		return !isNaN(parseFloat(n)) && isFinite(n);
+    	},
+
+    	isInt: function(n) {
+			return n.valueOf() % 1 == 0 ? true: false;
+    	},
+
+    	isIOS: function(userAgent) {
+    		var r = /(iPhone|iPod|iPad)/i;
+    		return r.test(userAgent);
+    	},
+
+    	isAndroid: function(userAgent) {
+    		var r = /(android)/i;
+    		return r.test(userAgent);
+    	},
+
+    	isMobile: function(userAgent) {
+    		var r = /(mobile)/i;
+    		return r.test(userAgent);
     	}
 	}
 })(jQuery, window);
