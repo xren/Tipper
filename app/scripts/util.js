@@ -58,6 +58,29 @@
     	isMobile: function(userAgent) {
     		var r = /(mobile)/i;
     		return r.test(userAgent);
+    	},
+
+    	blink: function(obj, delay) {
+    		var me = $(obj);
+    		if (me.attr('timerid') > 0) return;
+    		var timerid = setInterval(function() {
+    			if (me.css('opacity') == '1') {
+    				me.css('opacity', '0');
+    			} else {
+    				me.css('opacity', '1');
+    			}
+    		}, delay);
+    		me.attr('timerid', timerid);
+    	},
+
+    	unblink: function(obj) {
+    		var me = $(obj),
+    			timerid = me.attr('timerid');
+    		if (timerid > 0) {
+    			clearInterval(timerid);
+    			me.attr('timerid', 0);
+    			me.css('opacity', '1');
+    		}
     	}
 	}
 })(jQuery, window);

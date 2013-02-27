@@ -15,12 +15,6 @@ require.config({
 });
 require(['add2home']);
 require(['app'], function(module) {
+	var app = new module;
 	var userAgent = navigator.userAgent.toLowerCase();
-	if (!util.isIOS(userAgent)) {
-		// alert('PD');
-		// $('#tipper').hide();
-	} else {
-		$('#tipper').show();		
-		var app = new module;
-	}
 });

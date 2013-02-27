@@ -178,14 +178,13 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                         splitButtons.removeClass('btn-blue');
                         me.addClass('btn-blue');
                     }
-                    
+
                     // UI Change for updating                    
                     me.addClass('updating');
                     updateInputs.addClass('updating');
                     updateHide.hide();
                     updateConfirm.show();
                     me[0].firstChild.data = '_';
-
                     // Update status
                     this.updating = true;
                     
