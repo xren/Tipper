@@ -41,8 +41,10 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
 
                 tips.removeClass('btn-pink');
                 $(tips[current_tip]).addClass('btn-pink');
-
-                self.hideAddressBar();
+                
+                if (!window.navigator.standalone) {
+                    self.hideAddressBar();
+                }
 
                 self.on('updateinput', self.onInputUpate);
                 self.on('updateoutput', self.onOutputUpdate);
