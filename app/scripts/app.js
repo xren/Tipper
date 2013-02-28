@@ -99,6 +99,20 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                         data = JSON.parse(localStorage.getItem('splits'))[i];
                         me[0].firstChild.data = data;
                     } else {
+
+                        // Check if there's duplicate split value
+                        for (var j = 0; j < updateTargets.length; j++) {
+                            if (j !== i && $(updateTargets[j])[0].firstChild.data == data) {
+                                break;
+                            }
+                        }
+
+                        if (j !== updateTargets.length) {
+                            $(updateTargets[j]).addClass('btn-blue');
+                            setTimeout(function() { $(updateTargets[j]).removeClass('btn-blue'); }, 300);
+                            return;
+                        }
+
                         me.attr('data-splits', data);
                         if (Modernizr.localstorage) {
                             var split_data = JSON.parse(localStorage.getItem('splits'));
@@ -185,6 +199,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                     updateHide.hide();
                     updateConfirm.show();
                     me[0].firstChild.data = '_';
+
                     // Update status
                     this.updating = true;
                     
@@ -227,11 +242,11 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                             updateHide.show();
                             updateConfirm.hide();
                         }
+                    } else {
+                        splitButtons.removeClass('btn-blue');
+                        me.addClass('btn-blue');
                     }
-    
-                    splitButtons.removeClass('btn-blue');
-                    me.addClass('btn-blue');
-    
+
                     this.trigger('updateoutput');
                 }
             },

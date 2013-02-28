@@ -111,6 +111,7 @@ section {
     margin: 2% 0% 0% 0%;
     background-image: -webkit-linear-gradient(top, #313131, #1c1c1c);
     background-image: linear-gradient(top, #313131, #1c1c1c);
+    
 }
 
 .btn:active {
@@ -217,7 +218,7 @@ section {
     display: inline-block;
     width: 14px;
     height: 14px;
-    margin-top: 4px;
+    margin-top: 5px;
     background-image: url("../images/glyphicons-halflings-white.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
@@ -225,6 +226,14 @@ section {
 
 .icon-user {
     background-position: -168px 0;
+}
+
+.icon-thumb-up {
+    background-position: -96px -144px;
+}
+
+.icon-ok {
+    background-position: -288px 0;
 }
 
 
