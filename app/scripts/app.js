@@ -24,7 +24,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                                 splits_data = JSON.parse(localStorage.getItem('splits')),
                                 i = 0;
                         
-                        for (i < tips.length; i++) {
+                        for (; i < tips.length; i++) {
                             var tip = tips_data[i],
                                 split = splits_data[i];
 
