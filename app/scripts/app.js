@@ -20,10 +20,11 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                         // localStorage.setItem('current_split', '0');
                         localStorage.setItem('installed', self.version);
                     } else {
-                            tips_data = JSON.parse(localStorage.getItem('tips')),
-                            splits_data = JSON.parse(localStorage.getItem('splits'));
+                            var tips_data = JSON.parse(localStorage.getItem('tips')),
+                                splits_data = JSON.parse(localStorage.getItem('splits')),
+                                i = 0;
                         
-                        for (var i = 0; i < tips.length; i++) {
+                        for (i < tips.length; i++) {
                             var tip = tips_data[i],
                                 split = splits_data[i];
 
@@ -38,22 +39,26 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 // Initilize options
                 var current_tip = parseInt(localStorage.getItem('current_tip')),
                     current_split = parseInt(localStorage.getItem('current_split'));
-
+                
+                // Update tip according to history
                 tips.removeClass('btn-pink');
                 $(tips[current_tip]).addClass('btn-pink');
                 
                 if (!window.navigator.standalone) {
                     self.hideAddressBar();
                 }
-
+                
+                // internal events
                 self.on('updateinput', self.onInputUpate);
                 self.on('updateoutput', self.onOutputUpdate);
                 self.on('updatesplit', self.onSplitUpdate);
                 self.on('reset', self.onReset);
-
+                
+                // disable scroll for the whole app
                 $('#tipper').on('touchmove', this.stopScrolling);
                 $('#tipper').on('touchstart', this.stopScrolling);
-
+                
+                // gesture related events triggering
                 $('.dailpad .btn[data-role="tip"]').hammer().on('tap', function(e) {self.tipButtonClicked(e);});
                 $('.dailpad .btn[data-role="split"]').hammer().on('tap hold', function(e) {self.splitButtonClicked(e);});
                 $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('tap', function(e) {self.confirmButtonClicked(e);});
