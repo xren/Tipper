@@ -238,6 +238,9 @@ section {
     background-position: -288px 0;
 }
 
+.icon-remove {
+    background-position: -312px 0;
+ }
 
 /* For iPhone < 5 */
 @media only screen and (device-aspect-ratio: 2/3) {

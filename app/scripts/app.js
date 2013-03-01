@@ -57,6 +57,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 $('.dailpad .btn[data-role="tip"]').hammer().on('tap', function(e) {self.tipButtonClicked(e);});
                 $('.dailpad .btn[data-role="split"]').hammer().on('tap hold', function(e) {self.splitButtonClicked(e);});
                 $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('tap', function(e) {self.confirmButtonClicked(e);});
+                $('.dailpad .btn[data-role="updatecancel"]').hammer().on('tap', function(e) {self.cancelButtonClicked(e);});
                 $('.dailpad .btn[data-role="num"]').hammer().on('tap', function(e) {self.numButtonClicked(e);});
                 $('.dailpad .btn[data-role="pt"]').hammer().on('tap', function(e) {self.ptButtonClicked(e);});
                 $('.dailpad .btn[data-role="clear"]').hammer().on('tap', function(e) {self.clearButtonClicked(e);});
@@ -74,16 +75,16 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
             stopScrolling: function(e) {
                 e.preventDefault();
             },
-
-            confirmButtonClicked: function(e) {
-                if (!this.updating) {
+        
+            changeSplit: function(change) {
+                if (!this.updating)
                     return;
-                }
-
+                
                 var updateInputs = $('.dailpad .btn[data-update="input"]'),
                     updateHide = $('.dailpad .btn[data-update="hide"]'),
                     updateConfirm = $('.dailpad .btn[data-update="confirm"]'),
                     updateTargets = $('.dailpad .btn[data-update="target"]'),
+                    updateCancel = $('.dailpad .btn[data-update="cancel"]');
                     me = $('.dailpad .btn[data-update="target"].updating'),
                     splits = $('.dailpad .btn[data-role="split"]'),
                     i = 0;
@@ -97,18 +98,19 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
 
                 if (me.hasClass('updating')) {
                     var data = me[0].firstChild.data;
-                    if (!util.isNumber(data)) {
+                    if (!util.isNumber(data) || !change) {
                         data = JSON.parse(localStorage.getItem('splits'))[i];
                         me[0].firstChild.data = data;
                     } else {
 
-                        // Check if there's duplicate split value
+                        // Check if the current updating value is duplicated among the other two
                         for (var j = 0; j < updateTargets.length; j++) {
                             if (j !== i && $(updateTargets[j])[0].firstChild.data == data) {
                                 break;
                             }
                         }
-
+                        
+                        // if duplication exists, flash the other button
                         if (j !== updateTargets.length) {
                             $(updateTargets[j]).addClass('btn-blue');
                             setTimeout(function() { $(updateTargets[j]).removeClass('btn-blue'); }, 300);
@@ -116,6 +118,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                         }
 
                         me.attr('data-splits', data);
+                        
                         if (Modernizr.localstorage) {
                             var split_data = JSON.parse(localStorage.getItem('splits'));
                             split_data[i] = data;
@@ -128,11 +131,25 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                     updateInputs.removeClass('updating');
                     updateHide.show();
                     updateConfirm.hide();
+                    updateCancel.hide();
                 }
-
                 this.trigger('updateoutput');                
             },
 
+            confirmButtonClicked: function(e) {
+                if (!this.updating) {
+                    return;
+                }
+                this.changeSplit(true);
+            },
+            
+            cancelButtonClicked: function(e) {
+                if (!this.updating) {
+                    return;
+                }
+                this.changeSplit(false);
+            },
+        
             ptButtonClicked: function(e) {
                 this.trigger('updateinput', '.');
             },
@@ -187,6 +204,7 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                     var updateInputs = $('.dailpad .btn[data-update="input"]'),
                         updateHide = $('.dailpad .btn[data-update="hide"]'),
                         updateConfirm = $('.dailpad .btn[data-update="confirm"]'),
+                        updateCancel = $('.dailpad .btn[data-update="cancel"]'),
                         splitButtons = $('.dailpad .btn[data-role="split"]');
 
                     // If the updating one is not current highlighting, highlight current one
@@ -194,61 +212,27 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                         splitButtons.removeClass('btn-blue');
                         me.addClass('btn-blue');
                     }
-
+                    
+                    console.log(updateCancel);
                     // UI Change for updating                    
                     me.addClass('updating');
                     updateInputs.addClass('updating');
                     updateHide.hide();
                     updateConfirm.show();
+                    updateCancel.show();
                     me[0].firstChild.data = '_';
 
                     // Update status
                     this.updating = true;
                     
                 } else if (e.type === 'tap') {
-                    var num = me.attr('data-splits');
-                        currentOutput = $('.display[data-role="output"] p').text(),
-                        splitButtons = $('.dailpad .btn[data-role="split"]'),
-                        splits = $('.dailpad .btn[data-role="split"]'),
-                        i = 0;
-
-                    // find the index of current me
-                    for (; i < splits.length; i++) {
-                        if (splits[i] === me[0]) {
-                            break;
-                        }
-                    }
-
                     if (this.updating) {
-                        var updateInputs = $('.dailpad .btn[data-update="input"]'),
-                            updateHide = $('.dailpad .btn[data-update="hide"]'),
-                            updateConfirm = $('.dailpad .btn[data-update="confirm"]');
-
-                        if (me.hasClass('updating')) {
-                            var data = me[0].firstChild.data;
-                            if (!util.isNumber(data)) {
-                                data = JSON.parse(localStorage.getItem('splits'))[i];
-                                me[0].firstChild.data = data;
-                            } else {
-                                me.attr('data-splits', data);
-                                if (Modernizr.localstorage) {
-                                    var split_data = JSON.parse(localStorage.getItem('splits'));
-                                    split_data[i] = data;
-                                    localStorage.setItem('splits', JSON.stringify(split_data));
-                                }
-                            }
-
-                            this.updating = false;
-                            me.removeClass('updating');
-                            updateInputs.removeClass('updating');
-                            updateHide.show();
-                            updateConfirm.hide();
-                        }
-                    } else {
-                        splitButtons.removeClass('btn-blue');
-                        me.addClass('btn-blue');
+                        this.changeSplit(true);
+                        return;
                     }
-
+                    var splitButtons = $('.dailpad .btn[data-role="split"]');
+                    splitButtons.removeClass('btn-blue');
+                    me.addClass('btn-blue');
                     this.trigger('updateoutput');
                 }
             },
@@ -335,7 +319,12 @@ define(['hammer', 'cookie', 'util', 'modernizr'], function() {
                 } else {
                     text += num;
                 }
+                
                 target[0].firstChild.data = text;
+                // if this's a double digit number not, submit changes
+                if (target[0].firstChild.data.length > 1) {
+                    this.changeSplit(true);
+                }
             }
 
         
