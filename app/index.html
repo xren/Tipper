@@ -11,8 +11,8 @@
         <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
         <meta name="apple-mobile-web-app-capable" content="yes">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon.png" />
 
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/add2home.css">
@@ -67,19 +67,20 @@
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->        
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script type="text/javascript">
+            // TODO: rewrite ga tracking
+            if (window.location.href.indexOf('rexren.com') !== -1) {
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-38777943-1']);
+                _gaq.push(['_setDomainName', 'rexren.com']);
+                _gaq.push(['_trackPageview']);
+            }
 
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-38777943-1']);
-          _gaq.push(['_trackPageview']);
-
-          (function() {
+            (function() {
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-
+            })();
         </script>    
     <!-- build:js scripts/amd-app.js -->
     <script data-main="scripts/main" src="scripts/vendor/require.js"></script>
