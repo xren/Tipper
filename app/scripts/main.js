@@ -16,6 +16,14 @@ require.config({
 });
 require(['add2home']);
 require(['app'], function(module) {
-	var app = new module;
 	var userAgent = navigator.userAgent.toLowerCase();
+    if (!isIPhone(userAgent)) {
+	   var app = new module;
+    } else {
+        $('.overlay').addClass('active');
+    }
+    
+    function isIPhone(userAgent) {
+        return userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipod') !== -1;
+    }
 });
