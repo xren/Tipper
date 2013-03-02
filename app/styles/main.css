@@ -30,6 +30,7 @@ body {
     font-size: 2em;
     top: 20%;
     position: absolute;
+    width: 100%;
 }
 .overlay p {
     text-align:center;
@@ -38,6 +39,7 @@ body {
     font-size: 1.6em;
     top: 40%;
     position: absolute;
+    width: 100%;
 }
 
 .overlay.active {

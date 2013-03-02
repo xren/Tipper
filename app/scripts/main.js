@@ -17,7 +17,7 @@ require.config({
 require(['add2home']);
 require(['app'], function(module) {
 	var userAgent = navigator.userAgent.toLowerCase();
-    if (!isIPhone(userAgent)) {
+    if (isIPhone(userAgent)) {
 	   var app = new module;
     } else {
         $('.overlay').addClass('active');
