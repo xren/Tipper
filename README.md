@@ -3,7 +3,7 @@ Tipper
 
 Simple Tip Calculator for Humans 
 
-Check out the online running [Demo] (Version: Alpha 0.5.6.0)
+Check out the online running [Demo]
 
 Best view on iOS devices
 

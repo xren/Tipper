@@ -7,7 +7,8 @@ require.config({
     backbone: 'vendor/backbone-min',
     underscore: 'vendor/underscore-min',
   	add2home: 'vendor/add2home',
-  	hammer: 'vendor/jquery.hammer',
+    hammer: 'vendor/hammer',
+  	jqueryhammer: 'vendor/jquery.hammer',
     cookie: 'vendor/jquery.cookie',
     util: 'util',
     modernizr: 'vendor/modernizr.min'

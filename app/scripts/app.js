@@ -1,4 +1,4 @@
-define(['hammer', 'cookie', 'util', 'modernizr'], function() {
+define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
     var TipperView = Backbone.View.extend({
             version: 'v0.5',
             el: $('#tipper'),
