@@ -65,42 +65,104 @@ body {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);}
 
 section {
-	position:relative;
+	position: relative;
     overflow: hidden;
 }
 
 .label {
+/*    height: 11px;*/
     color: white;
-    margin-left: 1px;
+    margin-left: 2px;
+/*    margin-bottom: 1px;*/
 }
 
 .display {
+    position: relative;
+    height: 113px;
     background: #222;
-    padding:3px;
-    box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    padding: 3px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
     color: #444;
     border-radius: 5px;
     margin-top: 5px;
+    overflow: hidden;
 }
 
-.display p {
-/*    width:100%;*/
+.pull-left {
+    float:left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.screen {
     box-sizing: border-box;
-    font: 3.3em "Ubuntu Mono", monospace;
-    margin: 1px 0;
-    height: 40px;
     text-align:right;
-    padding:0 8px;
     color: #444;
     background: #bccd95;
-    border: 1px solid #222222;
-    border-radius:3px;
     background-image: -webkit-linear-gradient(top, #bccd95, #e0f5b1);
     background-image: -moz-linear-gradient(top, #bccd95, #e0f5b1);
     background-image: -o-linear-gradient(top, #bccd95, #e0f5b1);
     background-image: linear-gradient(to bottom, #bccd95, #e0f5b1);
+}
+
+.screen.screen-input {
+/*
+    position: absolute;
+    margin: 0 2%;
+    left: 0;
+    right: 0;
+    top: 18px;
+*/
+    margin: 0 1px;
+    clear: left;
+    padding: 0 6px;
+    border-top: 1px solid #222222;
+    border-left: 1px solid #222222;
+    border-right: 1px solid #222222;
+    border-top-right-radius: 3px;
+    border-top-left-radius:3px;
+    height: 35px;
+    background: #afbd8e;
+    font: 3.2em "Ubuntu Mono", monospace;
+    color:#3a3a3a;
     -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
+/*    z-index: 10;*/
+}
+
+.screen.screen-input.active {
+    padding: 5% 2%;
+    height: 53px;
+    font: 5.2em "Ubuntu Mono", monospace;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius:  3px;
+}
+
+.screen.screen-output {
+/*
+    position: absolute;
+    margin: 0 2%;
+    left: 0;
+    right: 0;
+    top: 53px;
+    width: 96.5%;
+*/
+    margin: 0 1px;
+    height: 50px;
+    padding: 0 3px;
+    border-bottom: 1px solid #222222;
+    border-left: 1px solid #222222;
+    border-right: 1px solid #222222;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font: 4.8em "Ubuntu Mono", monospace;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
+/*
+    z-index:9;
+*/
 }
 
 .display-aid {
@@ -129,7 +191,7 @@ section {
     width: 32%;
 	height: 24px;
     color: white;
-    padding: 0.7em 0 1.9em 0;
+    padding: 0.8em 0 1.9em 0;
     margin: 2% 0% 0% 0%;
     font: 2em "Ubuntu Mono", monospace;
     text-decoration: none;
@@ -279,7 +341,7 @@ section {
 @media only screen and (device-aspect-ratio: 2/3) {
     .btn {
         padding-top: 0.4em;
-        padding-bottom: 1.5em;
+        padding-bottom: 1.6em;
     }
 }
 

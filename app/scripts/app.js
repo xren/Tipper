@@ -3,6 +3,8 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             version: 'v0.5',
             el: $('#tipper'),
             updating: false,
+            inputScreen: $('.screen-input'),
+            outputScreen: $('.screen-output'),
             initialize: function() {
                 var self = this,
                     tips = $('.dailpad .btn[data-role="tip"]'),
@@ -43,11 +45,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 // Update tip according to history
                 tips.removeClass('btn-pink');
                 $(tips[current_tip]).addClass('btn-pink');
-                
-                if (!window.navigator.standalone) {
-                    self.hideAddressBar();
-                }
-                
+                                
                 // internal events
                 self.on('updateinput', self.onInputUpate);
                 self.on('updateoutput', self.onOutputUpdate);
@@ -245,17 +243,17 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             updateInput: function(value) {
                 if (!util.isNumber(value)) return;
 
-                $('.display[data-role="input"] p').text(value);
+                this.inputScreen.text(value);
                 this.trigger('updateoutput', value);
             },
 
             updateOutput: function(value) {
                 if (!util.isNumber(value)) return;
-                $('.display[data-role="output"] p').text(value);
+                this.outputScreen.text(value);
             },
 
             onInputUpate: function(value) {
-                var currentInput = $('.display[data-role="input"] p').text(),
+                var currentInput = this.inputScreen.text(),
                     pointIndex = currentInput.indexOf('.');
 
                 if (value === '.') {
@@ -293,7 +291,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             onOutputUpdate: function() {
                 var percentage = parseInt($('.dailpad .btn-pink[data-role="tip"]').attr('data-percentage'), 10) / 100,
                     splits = parseInt($('.dailpad .btn-blue[data-role="split"]').attr('data-splits'), 10),
-                    currentInput = parseFloat($('.display[data-role="input"] p').text()),
+                    currentInput = parseFloat(this.inputScreen.text()),
                     valueNew = ((currentInput + currentInput * percentage) / splits).toFixed(2);
 
                 if (valueNew === '0.00') valueNew = '0';
