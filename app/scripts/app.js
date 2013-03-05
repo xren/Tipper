@@ -57,22 +57,13 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 $('#tipper').on('touchstart', this.stopScrolling);
                 
                 // gesture related events triggering
-                $('.dailpad .btn[data-role="tip"]').hammer().on('tap', function(e) {self.tipButtonClicked(e);});
-                $('.dailpad .btn[data-role="split"]').hammer().on('tap hold', function(e) {self.splitButtonClicked(e);});
-                $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('tap', function(e) {self.confirmButtonClicked(e);});
-                $('.dailpad .btn[data-role="updatecancel"]').hammer().on('tap', function(e) {self.cancelButtonClicked(e);});
-                $('.dailpad .btn[data-role="num"]').hammer().on('tap', function(e) {self.numButtonClicked(e);});
-                $('.dailpad .btn[data-role="pt"]').hammer().on('tap', function(e) {self.ptButtonClicked(e);});
-                $('.dailpad .btn[data-role="clear"]').hammer().on('tap', function(e) {self.clearButtonClicked(e);});
-            },
-
-            hideAddressBar: function() {
-                if (document.height <= window.outerHeight + 10) {
-                    document.body.style.height = (window.outerHeight + 60) + 'px';
-                    setTimeout(function() {window.scrollTo(0, 1);}, 50);
-                } else {
-                    setTimeout(function() {window.scrollTo(0, 1);}, 0);
-                }
+                $('.dailpad .btn[data-role="tip"]').hammer().on('touchstart', function(e) {self.tipButtonClicked(e);});
+                $('.dailpad .btn[data-role="split"]').hammer().on('touchstart hold', function(e) {self.splitButtonClicked(e);});
+                $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('touchstart', function(e) {self.confirmButtonClicked(e);});
+                $('.dailpad .btn[data-role="updatecancel"]').hammer().on('touchstart', function(e) {self.cancelButtonClicked(e);});
+                $('.dailpad .btn[data-role="num"]').hammer().on('touchstart', function(e) {self.numButtonClicked(e);});
+                $('.dailpad .btn[data-role="pt"]').hammer().on('touchstart', function(e) {self.ptButtonClicked(e);});
+                $('.dailpad .btn[data-role="clear"]').hammer().on('touchstart', function(e) {self.clearButtonClicked(e);});
             },
 
             stopScrolling: function(e) {
@@ -197,7 +188,6 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             },
 
             updateSplitOption: function(e) {
-                console.log('e');
                 $('.dailpad div[data-role="num"]').addClass('.btn-blue');
             },
         
@@ -228,7 +218,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     // Update status
                     this.updating = true;
                     
-                } else if (e.type === 'tap') {
+                } else if (e.type === 'touchstart') {
                     if (this.updating) {
                         this.changeSplit(true);
                         return;
