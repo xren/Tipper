@@ -15,15 +15,54 @@ require.config({
   }
 });
 require(['add2home']);
+require(['ga'], function() {
+    // Only track pageview from prod
+    if (window.location.href.indexOf('rexren.com/apps/tipper') !== -1 ||
+        window.location.href.indexOf('rexren.com/tipper') !== -1) {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-38777943-1']);
+        _gaq.push(['_setDomainName', 'rexren.com']);
+        _gaq.push(['_trackPageview']);
+    } else {
+        console.log('This is not a stable version, expecting bugs');
+    }
+});
 require(['app'], function(module) {
 	var userAgent = navigator.userAgent.toLowerCase();
-    if (isIPhone(userAgent)) {
-	   var app = new module;
+    if (isDev() || isIOSMobile(userAgent)) {
+        var app = new module;
+        // If user on mobile safari, hide addressbar to enlarge the view area
+        if (!isStandAlone(userAgent) && isIOSMobile(userAgent)) {
+            hideAddressBar();
+        }
     } else {
         $('.overlay').addClass('active');
     }
-    
-    function isIPhone(userAgent) {
+
+    /* Support functions */
+    // iPhone or iPod
+    function isIOSMobile(userAgent) {
         return userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipod') !== -1;
+    }
+
+    // check if it is under development envrionment
+    function isDev() {
+        return window.location.href.indexOf('rexren.com') === -1;
+    }
+
+    // check if it is launched from home screen
+    function isStandAlone(userAgent) {
+        return ('standalone' in window.navigator &&
+                window.navigator.standalone &&
+                isIOSMobile(userAgent)) 
+    }
+
+    function hideAddressBar() {
+        if (document.height <= window.outerHeight + 10) {
+            document.body.style.height = (window.outerHeight + 60) + 'px';
+            setTimeout(function() {window.scrollTo(0, 1);}, 50);
+        } else {
+            setTimeout(function() {window.scrollTo(0, 1);}, 0);
+        }
     }
 });

@@ -12,6 +12,7 @@ styles/main.css
 scripts/app.js
 scripts/main.js
 scripts/util.js
+scripts/ga.js
 scripts/vendor/add2home.js
 scripts/vendor/underscore-min.js
 scripts/vendor/backbone-min.js
