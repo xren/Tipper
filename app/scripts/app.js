@@ -1,10 +1,12 @@
 define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
+    'use strict';
     var TipperView = Backbone.View.extend({
             version: 'v0.5',
             el: $('#tipper'),
             updating: false,
             inputScreen: $('.screen-input'),
             outputScreen: $('.screen-output'),
+            notificationEl: $('#notification'),
             initialize: function() {
                 var self = this,
                     tips = $('.dailpad .btn[data-role="tip"]'),
@@ -13,7 +15,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 console.log('initilizing tipper');
                 
                 if (!Modernizr.localstorage) {
-
+                    // TODO: if not support localStorage
                 } else {
                     if (!localStorage.getItem('installed') || localStorage.getItem('installed') !== self.version) {
                         localStorage.setItem('splits', JSON.stringify(['1', '2', '3']));
@@ -46,15 +48,15 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 tips.removeClass('btn-pink');
                 $(tips[current_tip]).addClass('btn-pink');
                                 
-                // internal events
+                // app events
                 self.on('updateinput', self.onInputUpate);
                 self.on('updateoutput', self.onOutputUpdate);
                 self.on('updatesplit', self.onSplitUpdate);
                 self.on('reset', self.onReset);
                 
                 // disable scroll for the whole app
-                $('#tipper').on('touchmove', this.stopScrolling);
-                $('#tipper').on('touchstart', this.stopScrolling);
+                $('#tipper').on('touchmove', self.stopScrolling);
+                $('#tipper').on('touchstart', self.stopScrolling);
                 
                 // gesture related events triggering
                 $('.dailpad .btn[data-role="tip"]').hammer().on('touchstart', function(e) {self.tipButtonClicked(e);});
@@ -64,6 +66,38 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 $('.dailpad .btn[data-role="num"]').hammer().on('touchstart', function(e) {self.numButtonClicked(e);});
                 $('.dailpad .btn[data-role="pt"]').hammer().on('touchstart', function(e) {self.ptButtonClicked(e);});
                 $('.dailpad .btn[data-role="clear"]').hammer().on('touchstart', function(e) {self.clearButtonClicked(e);});
+                
+                var appCache = window.applicationCache;
+                
+                appCache.addEventListener('downloading', function(e) {self.onCacheEvent(e);});
+                appCache.addEventListener('progress', function(e) {self.onCacheEvent(e);});
+                appCache.addEventListener('updateready', function(e) {self.onCacheEvent(e);});
+                appCache.addEventListener('error', function(e) {self.onCacheEvent(e);});
+            },
+        
+            onCacheEvent: function(e) {
+                if (!this.notificationEl.hasClass('active')) {
+                    this.notificationEl.addClass('active');
+                }
+                
+                switch(e.type) {
+                    case 'downloading':
+                        this.notificationEl.text('New Update Available');
+                        break;
+                    case 'progress':
+                        var progress = Math.round(e.loaded / e.total * 100).toString();
+                        this.notificationEl.text('Updating on progress: ' + progress + '%');
+                        break;
+                    case 'updateready':
+                        this.notificationEl.text('Complete! Restart Tipper and enjoy :)');
+                        break;
+                    default:
+                        break;
+                }
+            },
+        
+            onCacheError: function(e) {
+                console.log(e, 'error');
             },
 
             stopScrolling: function(e) {

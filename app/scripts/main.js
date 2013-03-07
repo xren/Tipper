@@ -15,18 +15,7 @@ require.config({
   }
 });
 require(['add2home']);
-require(['ga'], function() {
-    // Only track pageview from prod
-    if (window.location.href.indexOf('rexren.com/apps/tipper') !== -1 ||
-        window.location.href.indexOf('rexren.com/tipper') !== -1) {
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-38777943-1']);
-        _gaq.push(['_setDomainName', 'rexren.com']);
-        _gaq.push(['_trackPageview']);
-    } else {
-        console.log('This is not a stable version, expecting bugs');
-    }
-});
+// require(['ga']);
 require(['app'], function(module) {
 	var userAgent = navigator.userAgent.toLowerCase();
     if (isDev() || isIOSMobile(userAgent)) {

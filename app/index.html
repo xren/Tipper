@@ -26,6 +26,7 @@
 
     </head>
     <body>
+        <article id="notification"></article>
         <artical class="overlay"><h3>Heya, Tipper is a simple tip calculator designed specific for iOS Device</h3><p>Visit this page from your iOS device and install it on your Home Screen</p></artical>
         <artical id="tipper">
             <section>
@@ -71,6 +72,24 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->        
+    <script>
+        if (window.location.href.indexOf('rexren.com/apps/tipper') !== -1 ||
+            window.location.href.indexOf('rexren.com/tipper') !== -1) {
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38777943-1']);
+            _gaq.push(['_setDomainName', 'rexren.com']); 
+            _gaq.push(['_trackPageview']);
+        } else {
+            console.log('This is not a stable version, expecting bugs');
+        }
+
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
     <!-- build:js scripts/amd-app.js -->
     <script data-main="scripts/main" src="scripts/vendor/require.js"></script>
     <!-- endbuild -->
