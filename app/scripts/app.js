@@ -125,8 +125,8 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     i = 0;
 
                     // find the index of current me
-                    for (; i < updateTargets.length; i++) {
-                        if (updateTargets[i] === currentEl[0]) {
+                    for (; i < updateTargetsEl.length; i++) {
+                        if (updateTargetsEl[i] === currentEl[0]) {
                             break;
                         }
                     }
@@ -139,16 +139,16 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     } else {
 
                         // Check if the current updating value is duplicated among the other two
-                        for (var j = 0; j < updateTargets.length; j++) {
-                            if (j !== i && $(updateTargets[j])[0].firstChild.data == data) {
+                        for (var j = 0; j < updateTargetsEl.length; j++) {
+                            if (j !== i && $(updateTargetsEl[j])[0].firstChild.data == data) {
                                 break;
                             }
                         }
                         
                         // if duplication exists, flash the other button
-                        if (j !== updateTargets.length) {
-                            $(updateTargets[j]).addClass('btn-blue');
-                            setTimeout(function() { $(updateTargets[j]).removeClass('btn-blue'); }, 300);
+                        if (j !== updateTargetsEl.length) {
+                            $(updateTargetsEl[j]).addClass('btn-blue');
+                            setTimeout(function() { $(updateTargetsEl[j]).removeClass('btn-blue'); }, 300);
                             return;
                         }
 
