@@ -4,8 +4,8 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             version: 'v0.5',
             el: $('#tipper'),
             updating: false,
-            inputScreen: $('.screen-input'),
-            outputScreen: $('.screen-output'),
+            inputScreenEl: $('.screen-input'),
+            outputScreenEl: $('.screen-output'),
             notificationEl: $('#notification'),
             initialize: function() {
                 var self = this,
@@ -34,8 +34,8 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
                             $(tips[i]).attr('data-percentage', tip);
                             $(tips[i]).text(tip + '%');
-                            $(splits[i]).attr('data-splits', split);
-                            splits[i].firstChild.data = split;
+//                            $(splits[i]).attr('data-splits', split);
+//                            splits[i].firstChild.data = split;
                         }
                     }
                 }
@@ -89,14 +89,21 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                         this.notificationEl.text('Updating on progress: ' + progress + '%');
                         break;
                     case 'updateready':
-                        this.notificationEl.text('Complete! Restart Tipper and enjoy :)');
+                        var action = window.navigator.standalone ? 'Restart' : 'Refresh',
+                            notification = 'Complete! ' + action + ' Tipper and enjoy :)';
+                        
+                        this.notificationEl.text(notification);
                         break;
                     default:
+                        if (this.notificationEl.hasClass('active')) {
+                            this.notificationEl.removeClass('active');
+                        }
                         break;
                 }
             },
         
             onCacheError: function(e) {
+                this.notificationEl.text('Update failed! Please restart Tipper.');
                 console.log(e, 'error');
             },
 
@@ -108,27 +115,27 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 if (!this.updating)
                     return;
                 
-                var updateInputs = $('.dailpad .btn[data-update="input"]'),
-                    updateHide = $('.dailpad .btn[data-update="hide"]'),
-                    updateConfirm = $('.dailpad .btn[data-update="confirm"]'),
-                    updateTargets = $('.dailpad .btn[data-update="target"]'),
-                    updateCancel = $('.dailpad .btn[data-update="cancel"]');
-                    me = $('.dailpad .btn[data-update="target"].updating'),
+                var updateInputsEl = $('.dailpad .btn[data-update="input"]'),
+                    updateHideEl = $('.dailpad .btn[data-update="hide"]'),
+                    updateConfirmEl = $('.dailpad .btn[data-update="confirm"]'),
+                    updateTargetsEl = $('.dailpad .btn[data-update="target"]'),
+                    updateCancelEl = $('.dailpad .btn[data-update="cancel"]'),
+                    currentEl = $('.dailpad .btn[data-update="target"].updating'),
                     splits = $('.dailpad .btn[data-role="split"]'),
                     i = 0;
 
                     // find the index of current me
                     for (; i < updateTargets.length; i++) {
-                        if (updateTargets[i] === me[0]) {
+                        if (updateTargets[i] === currentEl[0]) {
                             break;
                         }
                     }
 
-                if (me.hasClass('updating')) {
-                    var data = me[0].firstChild.data;
+                if (currentEl.hasClass('updating')) {
+                    var data = currentEl[0].firstChild.data;
                     if (!util.isNumber(data) || !change) {
                         data = JSON.parse(localStorage.getItem('splits'))[i];
-                        me[0].firstChild.data = data;
+                        currentEl[0].firstChild.data = data;
                     } else {
 
                         // Check if the current updating value is duplicated among the other two
@@ -145,7 +152,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                             return;
                         }
 
-                        me.attr('data-splits', data);
+                        currentEl.attr('data-splits', data);
                         
                         if (Modernizr.localstorage) {
                             var split_data = JSON.parse(localStorage.getItem('splits'));
@@ -155,11 +162,11 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     }
 
                     this.updating = false;
-                    me.removeClass('updating');
-                    updateInputs.removeClass('updating');
-                    updateHide.show();
-                    updateConfirm.hide();
-                    updateCancel.hide();
+                    currentEl.removeClass('updating');
+                    updateInputsEl.removeClass('updating');
+                    updateHideEl.show();
+                    updateConfirmEl.hide();
+                    updateCancelEl.hide();
                 }
                 this.trigger('updateoutput');                
             },
@@ -267,17 +274,17 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             updateInput: function(value) {
                 if (!util.isNumber(value)) return;
 
-                this.inputScreen.text(value);
+                this.inputScreenEl.text(value);
                 this.trigger('updateoutput', value);
             },
 
             updateOutput: function(value) {
                 if (!util.isNumber(value)) return;
-                this.outputScreen.text(value);
+                this.outputScreenEl.text(value);
             },
 
             onInputUpate: function(value) {
-                var currentInput = this.inputScreen.text(),
+                var currentInput = this.inputScreenEl.text(),
                     pointIndex = currentInput.indexOf('.');
 
                 if (value === '.') {
@@ -315,7 +322,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             onOutputUpdate: function() {
                 var percentage = parseInt($('.dailpad .btn-pink[data-role="tip"]').attr('data-percentage'), 10) / 100,
                     splits = parseInt($('.dailpad .btn-blue[data-role="split"]').attr('data-splits'), 10),
-                    currentInput = parseFloat(this.inputScreen.text()),
+                    currentInput = parseFloat(this.inputScreenEl.text()),
                     valueNew = ((currentInput + currentInput * percentage) / splits).toFixed(2);
 
                 if (valueNew === '0.00') valueNew = '0';
