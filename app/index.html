@@ -31,10 +31,16 @@
         <artical id="tipper">
             <section>
                 <div class="display" data-role="input">
-                    <i class="label pull-left">PRE-TIP AMOUNT</i>
-                    <div class="screen screen-input">0</div>
-                    <div class="screen screen-output">0</div>
-                    <i class="label pull-left">TOTAL PER PERSON</i>
+                    <div class="screen screen-input">
+                        <span class="info pull-left info-bill">Bill:</span>
+<!--                        <span class="info pull-left info-bill">People:</span>-->
+                        <span class="input-value">0</span>
+                    </div>
+                    <div class="screen screen-output">
+                        <span class="info pull-left info-total active ">Total:</span>
+                        <span class="info pull-left info-each">Each:</span>
+                        <span class="output-value">0</span>
+                    </div>
                 </div>
             <!--        <aside class="display-aid">15%</aside>-->
 <!--                 <div class="display" data-role="output">
@@ -45,12 +51,14 @@
             </section>
             
             <section class="dailpad">
+                <div class="btn btn-gray btn-blue" data-role="total" data-splits="1" data-update="target" style="margin-right: 2%"><i class="icon icon-user"></i></div>
+                <div class="btn btn-col2 btn-gray" data-role="split" data-splits="2" data-update="target">
+                    <span class="input-btn">_</span><i class="icon icon-user"></i><i class="icon icon-user"></i>
+                </div>
+<!--                <div class="btn btn-gray" data-role="split" data-splits="3" data-update="target">All</div>-->
                 <div class="btn btn-gray" data-role="tip" data-percentage="15">15%</div>
                 <div class="btn center btn-gray" data-role="tip" data-percentage="18">18%</div>
                 <div class="btn btn-gray" data-role="tip" data-percentage="20">20%</div>
-                <div class="btn btn-gray btn-blue" data-role="split" data-splits="1" data-update="target">1<i class="icon icon-user"></i></div>
-                <div class="btn center btn-gray" data-role="split" data-splits="2" data-update="target">2<i class="icon icon-user"></i></div>
-                <div class="btn btn-gray" data-role="split" data-splits="3" data-update="target">3<i class="icon icon-user"></i></div>
                 <div class="btn" data-role="num" data-num="1" data-update="input">1</div>
                 <div class="btn center" data-role="num" data-num="2" data-update="input">2</div>
                 <div class="btn" data-role="num" data-num="3" data-update="input">3</div>
@@ -64,7 +72,6 @@
                 <div class="btn btn-blue" data-role="updateconfirm" data-update="confirm" hidden><i class="icon icon-ok"></i></div>
                 <div class="btn center" data-role="num" data-num="0" data-update="input">0</div>
                 <div class="btn" data-role="clear" data-num="C" data-update="input">C</div>
-<!--                <div class="btn btn-blue" data-role="updatecancel" data-update="cancel" hidden><i class="icon icon-remove"></i></div>-->
             </section>
         </artical>
 

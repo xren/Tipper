@@ -4,8 +4,8 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             version: 'v0.5',
             el: $('#tipper'),
             updating: false,
-            inputScreenEl: $('.screen-input'),
-            outputScreenEl: $('.screen-output'),
+            inputScreenEl: $('.input-value'),
+            outputScreenEl: $('.output-value'),
             notificationEl: $('#notification'),
             initialize: function() {
                 var self = this,
@@ -59,14 +59,15 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 $('#tipper').on('touchstart', self.stopScrolling);
                 
                 // gesture related events triggering
-                $('.dailpad .btn[data-role="tip"]').hammer().on('touchstart', function(e) {self.tipButtonClicked(e);});
-                $('.dailpad .btn[data-role="split"]').hammer().on('touchstart hold', function(e) {self.splitButtonClicked(e);});
-                $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('touchstart', function(e) {self.confirmButtonClicked(e);});
-                $('.dailpad .btn[data-role="updatecancel"]').hammer().on('touchstart', function(e) {self.cancelButtonClicked(e);});
-                $('.dailpad .btn[data-role="num"]').hammer().on('touchstart', function(e) {self.numButtonClicked(e);});
-                $('.dailpad .btn[data-role="pt"]').hammer().on('touchstart', function(e) {self.ptButtonClicked(e);});
-                $('.dailpad .btn[data-role="clear"]').hammer().on('touchstart', function(e) {self.clearButtonClicked(e);});
-                
+                $('.dailpad .btn[data-role="tip"]').hammer().on('tap', function(e) {self.tipButtonClicked(e);});
+                $('.dailpad .btn[data-role="split"]').hammer().on('tap', function(e) {self.splitButtonClicked(e);});
+                $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('tap', function(e) {self.confirmButtonClicked(e);});
+                $('.dailpad .btn[data-role="updatecancel"]').hammer().on('tap', function(e) {self.cancelButtonClicked(e);});
+                $('.dailpad .btn[data-role="num"]').hammer().on('tap', function(e) {self.numButtonClicked(e);});
+                $('.dailpad .btn[data-role="pt"]').hammer().on('tap', function(e) {self.ptButtonClicked(e);});
+                $('.dailpad .btn[data-role="clear"]').hammer().on('tap', function(e) {self.clearButtonClicked(e);});
+                $('.dailpad .btn[data-role="total"]').hammer().on('tap', function(e) {self.totalButtonClicked(e);});
+
                 var appCache = window.applicationCache;
                 
                 appCache.addEventListener('downloading', function(e) {self.onCacheEvent(e);});
@@ -124,13 +125,20 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     splits = $('.dailpad .btn[data-role="split"]'),
                     i = 0;
 
-                    // find the index of current me
-                    for (; i < updateTargetsEl.length; i++) {
-                        if (updateTargetsEl[i] === currentEl[0]) {
-                            break;
-                        }
+                if (change) {
+                    
+                } else {
+                }
+                
+                
+                // find the index of current me
+                for (; i < updateTargetsEl.length; i++) {
+                    if (updateTargetsEl[i] === currentEl[0]) {
+                        break;
                     }
-
+                }
+                
+                
                 if (currentEl.hasClass('updating')) {
                     var data = currentEl[0].firstChild.data;
                     if (!util.isNumber(data) || !change) {
@@ -152,13 +160,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                             return;
                         }
 
-                        currentEl.attr('data-splits', data);
-                        
-                        if (Modernizr.localstorage) {
-                            var split_data = JSON.parse(localStorage.getItem('splits'));
-                            split_data[i] = data;
-                            localStorage.setItem('splits', JSON.stringify(split_data));
-                        }
+                        currentEl.attr('data-splits', data);                        
                     }
 
                     this.updating = false;
@@ -175,7 +177,22 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 if (!this.updating) {
                     return;
                 }
-                this.changeSplit(true);
+
+                var currentEl = $(e.target),
+                    updatingEl = $('.updating'),
+                    updateHideEl = $('.dailpad .btn[data-update="hide"]'),
+                    totalLabelEl = $('.info-total'),
+                    eachLabelEl = $('.info-each');
+
+                updatingEl.removeClass('updating');
+                updateHideEl.show();
+                currentEl.hide();
+                if (totalLabelEl.hasClass('active')) {
+                    totalLabelEl.removeClass('active');
+                    eachLabelEl.addClass('active');
+                }
+                this.updating = false;
+                this.trigger('updateoutput');
             },
             
             cancelButtonClicked: function(e) {
@@ -190,7 +207,6 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             },
 
             clearButtonClicked: function(e) {
-                console.log('e');
                 this.trigger('reset');
             },
 
@@ -231,43 +247,94 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             updateSplitOption: function(e) {
                 $('.dailpad div[data-role="num"]').addClass('.btn-blue');
             },
+
+            totalButtonClicked: function(e) {
+                var currentEl = $(e.target),
+                    updateInputsEl = $('.dailpad .btn[data-update="input"]'),
+                    updateHideEl = $('.dailpad .btn[data-update="hide"]'),
+                    updateConfirmEl = $('.dailpad .btn[data-update="confirm"]'),
+                    splitButtonEl = $('.dailpad .btn[data-role="split"]'),
+                    totalButtonEl = $('.dailpad .btn[data-role="total"]'),
+                    buttonInputFieldEl = $('.input-btn'),
+                    splitButtonsIconEl = $('.btn[data-role="split"] .icon' ),
+                    totalLabelEl = $('.info-total'),
+                    eachLabelEl = $('.info-each');
+
+                if (e.type === 'tap') {
+                    if (!currentEl.hasClass('btn-blue')) {
+                        this.updating = false;
+                        buttonInputFieldEl.text('_');
+                        buttonInputFieldEl.removeClass('active');
+                        $(splitButtonsIconEl[0]).show();
+                        updateHideEl.show();
+                        updateConfirmEl.hide();
+
+                        splitButtonEl.removeClass('btn-blue');
+                        currentEl.addClass('btn-blue');
+                        $('.updating').removeClass('updating');
+        
+                        if (eachLabelEl.hasClass('active')) {
+                            eachLabelEl.removeClass('active');
+                            totalLabelEl.addClass('active');
+                        }
+
+                        this.trigger('updateoutput');
+                    }
+                }
+            },
         
             splitButtonClicked: function(e) {
-                var me = $(e.target);
-                if (e.type === 'hold' && !this.updating) {  
-                    var updateInputs = $('.dailpad .btn[data-update="input"]'),
-                        updateHide = $('.dailpad .btn[data-update="hide"]'),
-                        updateConfirm = $('.dailpad .btn[data-update="confirm"]'),
-                        updateCancel = $('.dailpad .btn[data-update="cancel"]'),
-                        splitButtons = $('.dailpad .btn[data-role="split"]');
+                var currentEl = $(e.target),
+                    updateInputEl = $('.dailpad .btn[data-update="input"]'),
+                    updateHideEl = $('.dailpad .btn[data-update="hide"]'),
+                    updateConfirmEl = $('.dailpad .btn[data-update="confirm"]'),
+                    splitButtonEl = $('.dailpad .btn[data-role="split"]'),
+                    totalButtonEl = $('.dailpad .btn[data-role="total"]'),
+                    buttonInputFieldEl = $('.input-btn'),
+                    splitButtonsIconEl = $('.btn[data-role="split"] .icon'),
+                    totalLabelEl = $('.info-total'),
+                    eachLabelEl = $('.info-each');
 
-                    // If the updating one is not current highlighting, highlight current one
-                    if (!me.hasClass('btn-blue')) {
-                        splitButtons.removeClass('btn-blue');
-                        me.addClass('btn-blue');
-                    }
-                    
-                    console.log(updateCancel);
-                    // UI Change for updating                    
-                    me.addClass('updating');
-                    updateInputs.addClass('updating');
-                    updateHide.hide();
-                    updateConfirm.show();
-                    updateCancel.show();
-                    me[0].firstChild.data = '_';
-
-                    // Update status
-                    this.updating = true;
-                    
-                } else if (e.type === 'touchstart') {
+                if (e.type === 'tap') {
                     if (this.updating) {
-                        this.changeSplit(true);
-                        return;
+                        $('.updating').removeClass('updating');
+                        updateHideEl.show();
+                        updateConfirmEl.hide();
+                        this.updating = false;
+
+                        if (totalLabelEl.hasClass('active')) {
+                            totalLabelEl.removeClass('active');
+                            eachLabelEl.addClass('active');
+                        }
+
+                        this.trigger('updateoutput');
+                    } else {  
+                        if (!buttonInputFieldEl.hasClass('active')) {
+                            buttonInputFieldEl.addClass('active');
+                            $(splitButtonsIconEl[0]).hide();
+                        }
+
+                        buttonInputFieldEl.text('_');  
+                        // If the updating one is not current highlighting, highlight current one
+                        if (!currentEl.hasClass('btn-blue')) {
+                            totalButtonEl.removeClass('btn-blue');
+                            currentEl.addClass('btn-blue');
+                        }
+                        
+                        if (!currentEl.hasClass('updating')) {
+                            currentEl.addClass('updating');
+                        }
+
+                        if (!updateInputEl.hasClass('updating')) {
+                            updateInputEl.addClass('updating');
+                        }
+                        // UI Change for updating                    
+                        updateHideEl.hide();
+                        updateConfirmEl.show();
+                        
+                        // Update status
+                        this.updating = true;
                     }
-                    var splitButtons = $('.dailpad .btn[data-role="split"]');
-                    splitButtons.removeClass('btn-blue');
-                    me.addClass('btn-blue');
-                    this.trigger('updateoutput');
                 }
             },
 
@@ -321,9 +388,18 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
             onOutputUpdate: function() {
                 var percentage = parseInt($('.dailpad .btn-pink[data-role="tip"]').attr('data-percentage'), 10) / 100,
-                    splits = parseInt($('.dailpad .btn-blue[data-role="split"]').attr('data-splits'), 10),
+                    splits = parseInt($('.btn[data-role="split"] .input-btn').text(), 10),
                     currentInput = parseFloat(this.inputScreenEl.text()),
-                    valueNew = ((currentInput + currentInput * percentage) / splits).toFixed(2);
+                    totalLabelEl = $('.info-total'),
+                    eachLabelEl = $('.info-each'),
+                    valueNew;
+
+                // If current on total
+                if (!$('.btn[data-role="split"]').hasClass('btn-blue')) {
+                    splits = 1;
+                }
+
+                valueNew = ((currentInput + currentInput * percentage) / splits).toFixed(2);
 
                 if (valueNew === '0.00') valueNew = '0';
 
@@ -332,16 +408,16 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
             onReset: function() {
                 if (this.updating) {
-                    var updating_el = $('.btn.updating');
-                    updating_el[0].firstChild.data = '_';
+                    var ButtonInputEl = $('.btn[data-role="split"] .input-btn');
+                    ButtonInputEl.text('_');
                 } else {
                     this.updateInput('0');
                 }
             },
 
             onSplitUpdate: function(num) {
-                var target = $('.dailpad .btn[data-role="split"].updating'),
-                    text = target[0].firstChild.data;
+                var buttonInputEl = $('.btn[data-role="split"] .input-btn'),
+                    text = buttonInputEl.text();
 
                 if (text.length > 1) {
                     return;
@@ -354,11 +430,12 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     text += num;
                 }
                 
-                target[0].firstChild.data = text;
-                // if this's a double digit number not, submit changes
-                if (target[0].firstChild.data.length > 1) {
-                    this.changeSplit(true);
-                }
+                buttonInputEl.text(text);
+                // target[0].firstChild.data = text;
+                // // if this's a double digit number not, submit changes
+                // if (target[0].firstChild.data.length > 1) {
+                //     this.changeSplit(true);
+                // }
             }
 
         
