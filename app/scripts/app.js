@@ -59,14 +59,14 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 $('#tipper').on('touchstart', self.stopScrolling);
                 
                 // gesture related events triggering
-                $('.dailpad .btn[data-role="tip"]').hammer().on('tap', function(e) {self.tipButtonClicked(e);});
-                $('.dailpad .btn[data-role="split"]').hammer().on('tap', function(e) {self.splitButtonClicked(e);});
-                $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('tap', function(e) {self.confirmButtonClicked(e);});
-                $('.dailpad .btn[data-role="updatecancel"]').hammer().on('tap', function(e) {self.cancelButtonClicked(e);});
-                $('.dailpad .btn[data-role="num"]').hammer().on('tap', function(e) {self.numButtonClicked(e);});
-                $('.dailpad .btn[data-role="pt"]').hammer().on('tap', function(e) {self.ptButtonClicked(e);});
-                $('.dailpad .btn[data-role="clear"]').hammer().on('tap', function(e) {self.clearButtonClicked(e);});
-                $('.dailpad .btn[data-role="total"]').hammer().on('tap', function(e) {self.totalButtonClicked(e);});
+                $('.dailpad .btn[data-role="tip"]').hammer().on('touchstart', function(e) {self.tipButtonClicked(e);});
+                $('.dailpad .btn[data-role="split"]').hammer().on('touchstart', function(e) {self.splitButtonClicked(e);});
+                $('.dailpad .btn[data-role="updateconfirm"]').hammer().on('touchstart', function(e) {self.confirmButtonClicked(e);});
+                $('.dailpad .btn[data-role="updatecancel"]').hammer().on('touchstart', function(e) {self.cancelButtonClicked(e);});
+                $('.dailpad .btn[data-role="num"]').hammer().on('touchstart', function(e) {self.numButtonClicked(e);});
+                $('.dailpad .btn[data-role="pt"]').hammer().on('touchstart', function(e) {self.ptButtonClicked(e);});
+                $('.dailpad .btn[data-role="clear"]').hammer().on('touchstart', function(e) {self.clearButtonClicked(e);});
+                $('.dailpad .btn[data-role="total"]').hammer().on('touchstart', function(e) {self.totalButtonClicked(e);});
 
                 var appCache = window.applicationCache;
                 
@@ -177,13 +177,18 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 if (!this.updating) {
                     return;
                 }
-
+                
                 var currentEl = $(e.target),
                     updatingEl = $('.updating'),
                     updateHideEl = $('.dailpad .btn[data-update="hide"]'),
+                    buttonInputEl = $('.btn[data-role="split"] .input-btn'),
                     totalLabelEl = $('.info-total'),
                     eachLabelEl = $('.info-each');
-
+                
+                if (buttonInputEl.text() === '_') {
+                    return;
+                }
+                
                 updatingEl.removeClass('updating');
                 updateHideEl.show();
                 currentEl.hide();
@@ -260,7 +265,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     totalLabelEl = $('.info-total'),
                     eachLabelEl = $('.info-each');
 
-                if (e.type === 'tap') {
+                if (e.type === 'touchstart') {
                     if (!currentEl.hasClass('btn-blue')) {
                         this.updating = false;
                         buttonInputFieldEl.text('_');
@@ -290,13 +295,16 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     updateConfirmEl = $('.dailpad .btn[data-update="confirm"]'),
                     splitButtonEl = $('.dailpad .btn[data-role="split"]'),
                     totalButtonEl = $('.dailpad .btn[data-role="total"]'),
-                    buttonInputFieldEl = $('.input-btn'),
+                    buttonInputEl = $('.input-btn'),
                     splitButtonsIconEl = $('.btn[data-role="split"] .icon'),
                     totalLabelEl = $('.info-total'),
                     eachLabelEl = $('.info-each');
 
-                if (e.type === 'tap') {
+                if (e.type === 'touchstart') {
                     if (this.updating) {
+                        if (buttonInputEl.text() === '_') {
+                            return;
+                        }
                         $('.updating').removeClass('updating');
                         updateHideEl.show();
                         updateConfirmEl.hide();
@@ -309,12 +317,12 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
                         this.trigger('updateoutput');
                     } else {  
-                        if (!buttonInputFieldEl.hasClass('active')) {
-                            buttonInputFieldEl.addClass('active');
+                        if (!buttonInputEl.hasClass('active')) {
+                            buttonInputEl.addClass('active');
                             $(splitButtonsIconEl[0]).hide();
                         }
 
-                        buttonInputFieldEl.text('_');  
+                        buttonInputEl.text('_');  
                         // If the updating one is not current highlighting, highlight current one
                         if (!currentEl.hasClass('btn-blue')) {
                             totalButtonEl.removeClass('btn-blue');
