@@ -6,6 +6,76 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
         touchMethod = 'touchstart';
     }
 
+    var App = Backbone.View.extend({
+        initialize: function() {
+            var self = this;
+
+            self.notificationEl = self.$el.find('#notification');
+            self.tipperEl = self.$el.find('#tipper');
+            self.editingOverlayEl = self.$el.find('.editing-overlay');
+            
+            self.tipperEl.on('touchmove', self.stopScrolling);
+            self.tipperEl.on('touchstart', self.stopScrolling);
+            self.editingOverlayEl.on('touchmove', self.stopScrolling);
+            self.editingOverlayEl.on('touchstart', self.stopScrolling);
+            
+            self.listenTo(self.model, 'change:splitsEditing', self.changeSplitEditing);
+
+            var appCache = window.applicationCache;
+            
+            appCache.addEventListener('downloading', function(e) {self.onCacheEvent(e);});
+            appCache.addEventListener('progress', function(e) {self.onCacheEvent(e);});
+            appCache.addEventListener('updateready', function(e) {self.onCacheEvent(e);});
+            appCache.addEventListener('error', function(e) {self.onCacheEvent(e);});
+        },
+
+        stopScrolling: function(e) {
+            e.preventDefault();
+        },
+        
+        changeSplitEditing: function(e) {
+            var editing = this.model.get('splitsEditing');
+            
+            if (editing) {
+                this.editingOverlayEl.addClass('active');
+            } else {
+                this.editingOverlayEl.removeClass('active');
+            }
+        },
+
+        onCacheEvent: function(e) {
+            if (!this.notificationEl.hasClass('active')) {
+                this.notificationEl.addClass('active');
+            }
+            
+            switch(e.type) {
+                case 'downloading':
+                    this.notificationEl.text('New Update Available');
+                    break;
+                case 'progress':
+                    var progress = Math.round(e.loaded / e.total * 100).toString();
+                    this.notificationEl.text('Updating on progress: ' + progress + '%');
+                    break;
+                case 'updateready':
+                    var action = window.navigator.standalone ? 'Restart' : 'Refresh',
+                        notification = 'Complete! ' + action + ' Tipper and enjoy :)';
+                    
+                    this.notificationEl.text(notification);
+                    break;
+                default:
+                    if (this.notificationEl.hasClass('active')) {
+                        this.notificationEl.removeClass('active');
+                    }
+                    break;
+            }
+        },
+    
+        onCacheError: function(e) {
+            this.notificationEl.text('Update failed! Please restart Tipper.');
+            console.log(e, 'error');
+        },
+
+    });
     var Model = Backbone.Model.extend({
         defaults : {
             bill: '0',
@@ -240,7 +310,6 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
         },
 
         updateSplits: function(value) {
-            console.log(value);
             if (!util.isInt(value) && value !== '_') {
                 throw "Incorrect splits value";
             }
@@ -543,6 +612,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
     });    
 
     return {
+        App: App,
         Model: Model,
         InputScreen: InputScreen,
         OutputScreen: OutputScreen,

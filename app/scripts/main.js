@@ -31,9 +31,12 @@ require(['add2home']);
 // });
 require(['util', 'tipper'], function(utils, module) {
  var userAgent = navigator.userAgent.toLowerCase();
-    console.log(util);
     if (util.isDev() || util.isIOSMobile(userAgent)) {
         var model = new module.Model({slient: true}),
+            app = new module.App({
+                model: model,
+                el: $('body')
+            }),
             inputScreen = new module.InputScreen({
                 model: model,
                 el: $('.screen-input')
@@ -54,6 +57,9 @@ require(['util', 'tipper'], function(utils, module) {
                 model: model,
                 el: $('div[data-content="btn-common"]')
             });
+        if (!window.navigator.standalone) {
+            util.hideAddressBar();
+        }
     } else {
         $('.overlay').addClass('active');
     }

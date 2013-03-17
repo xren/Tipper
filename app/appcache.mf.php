@@ -2,7 +2,7 @@
 header("Content-Type: text/cache-manifest");
 ?>
 CACHE MANIFEST
-# 2013-2-25: v0.6.0.8
+# 2013-3-17: v0.7.0.8
 
 CACHE:
 images/glyphicons-halflings-white.png
