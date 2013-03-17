@@ -1,5 +1,5 @@
-(function($, exports) {
-	exports.util = {
+(function($) {
+	window.util = {
 		setCookie: function(key, value, options) {
 			return $.cookie(key, value, options);
 		},
@@ -81,6 +81,31 @@
     			me.attr('timerid', 0);
     			me.css('opacity', '1');
     		}
-    	}
+    	},
+
+        isIOSMobile: function(userAgent) {
+            return userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipod') !== -1;
+        },
+
+        // check if it is under development envrionment
+        isDev: function() {
+            return window.location.href.indexOf('rexren.com') === -1;
+        },
+
+        // check if it is launched from home screen
+        isStandAlone: function(userAgent) {
+            return ('standalone' in window.navigator &&
+                    window.navigator.standalone &&
+                    isIOSMobile(userAgent)) 
+        },
+
+        hideAddressBar: function() {
+            if (document.height <= window.outerHeight + 10) {
+                document.body.style.height = (window.outerHeight + 60) + 'px';
+                setTimeout(function() {window.scrollTo(0, 1);}, 50);
+            } else {
+                setTimeout(function() {window.scrollTo(0, 1);}, 0);
+            }
+        }
 	}
 })(jQuery, window);

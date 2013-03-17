@@ -37,7 +37,7 @@
                         <span class="input-value">0</span>
                     </div>
                     <div class="screen screen-output">
-                        <span class="info pull-left info-total active ">Total:</span>
+                        <span class="info pull-left info-total active">Total:</span>
                         <span class="info pull-left info-each">Each:</span>
                         <span class="output-value">0</span>
                     </div>
@@ -51,27 +51,32 @@
             </section>
             
             <section class="dailpad">
-                <div class="btn btn-gray btn-blue" data-role="total" data-splits="1" data-update="target" style="margin-right: 2%"><i class="icon icon-user"></i></div>
-                <div class="btn btn-col2 btn-gray" data-role="split" data-splits="2" data-update="target">
-                    <span class="input-btn">_</span><i class="icon icon-user"></i><i class="icon icon-user"></i>
+                <div data-content="btn-splits">
+                    <div class="btn btn-gray btn-blue" data-role="total" style="margin-right: 2%"><i class="icon icon-user"></i></div>
+                    <div class="btn btn-col2 btn-gray" data-role="splits" data-update="target">
+                        <span class="input-splits blink">_</span><i class="icon icon-user js-toggle"></i><i class="icon icon-user"></i>
+                    </div>
                 </div>
-<!--                <div class="btn btn-gray" data-role="split" data-splits="3" data-update="target">All</div>-->
-                <div class="btn btn-gray" data-role="tip" data-percentage="15">15%</div>
-                <div class="btn center btn-gray" data-role="tip" data-percentage="18">18%</div>
-                <div class="btn btn-gray" data-role="tip" data-percentage="20">20%</div>
-                <div class="btn" data-role="num" data-num="1" data-update="input">1</div>
-                <div class="btn center" data-role="num" data-num="2" data-update="input">2</div>
-                <div class="btn" data-role="num" data-num="3" data-update="input">3</div>
-                <div class="btn" data-role="num" data-num="4" data-update="input">4</div>
-                <div class="btn center" data-role="num" data-num="5" data-update="input">5</div>
-                <div class="btn" data-role="num" data-num="6" data-update="input">6</div>
-                <div class="btn" data-role="num" data-num="7" data-update="input">7</div>
-                <div class="btn center" data-role="num" data-num="8" data-update="input">8</div>
-                <div class="btn" data-role="num" data-num="9" data-update="input">9</div>
-                <div class="btn" data-role="pt" data-num="." data-update="hide">.</div>
-                <div class="btn btn-blue" data-role="updateconfirm" data-update="confirm" hidden><i class="icon icon-ok"></i></div>
-                <div class="btn center" data-role="num" data-num="0" data-update="input">0</div>
-                <div class="btn" data-role="clear" data-num="C" data-update="input">C</div>
+                <div data-content="btn-percentage">
+                    <div class="btn btn-gray" data-role="tip" data-percentage="15">15%</div>
+                    <div class="btn center btn-gray btn-pink" data-role="tip" data-percentage="18">18%</div>
+                    <div class="btn btn-gray" data-role="tip" data-percentage="20">20%</div>
+                </div>
+                <div data-content="btn-common">
+                    <div class="btn" data-role="num" data-num="1" data-update="input">1</div>
+                    <div class="btn center" data-role="num" data-num="2" data-update="input">2</div>
+                    <div class="btn" data-role="num" data-num="3" data-update="input">3</div>
+                    <div class="btn" data-role="num" data-num="4" data-update="input">4</div>
+                    <div class="btn center" data-role="num" data-num="5" data-update="input">5</div>
+                    <div class="btn" data-role="num" data-num="6" data-update="input">6</div>
+                    <div class="btn" data-role="num" data-num="7" data-update="input">7</div>
+                    <div class="btn center" data-role="num" data-num="8" data-update="input">8</div>
+                    <div class="btn" data-role="num" data-num="9" data-update="input">9</div>
+                    <div class="btn" data-role="pt" data-num="." data-update="hide">.</div>
+                    <div class="btn btn-blue" data-role="updateconfirm" data-update="confirm" hidden><i class="icon icon-ok"></i></div>
+                    <div class="btn center" data-role="num" data-num="0" data-update="input">0</div>
+                    <div class="btn" data-role="clear" data-num="C" data-update="input">C</div>
+                </div>
             </section>
         </artical>
 

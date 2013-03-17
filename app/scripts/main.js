@@ -11,47 +11,50 @@ require.config({
   	jqueryhammer: 'vendor/jquery.hammer',
     cookie: 'vendor/jquery.cookie',
     util: 'util',
-    modernizr: 'vendor/modernizr.min'
+    modernizr: 'vendor/modernizr.min',
+    mocha: 'vendor/mocha',
+    chai: 'vendor/chai',
+    expect: 'vendor/expect'
   }
 });
 require(['add2home']);
-// require(['ga']);
-require(['app'], function(module) {
-	var userAgent = navigator.userAgent.toLowerCase();
-    if (isDev() || isIOSMobile(userAgent)) {
-        var app = new module;
-        // If user on mobile safari, hide addressbar to enlarge the view area
-        if (!isStandAlone(userAgent) && isIOSMobile(userAgent)) {
-            hideAddressBar();
-        }
+// require(['util']);
+// require(['chai', 'mocha',  'expect'], function(chai) {
+//     assert = chai.assert;
+//     expect = chai.expect;
+    
+//     mocha.setup('bdd');
+
+//     require(['test'], function(module) {
+//         mocha.run();
+//     });
+// });
+require(['util', 'tipper'], function(utils, module) {
+ var userAgent = navigator.userAgent.toLowerCase();
+    console.log(util);
+    if (util.isDev() || util.isIOSMobile(userAgent)) {
+        var model = new module.Model({slient: true}),
+            inputScreen = new module.InputScreen({
+                model: model,
+                el: $('.screen-input')
+            }),
+            outputScreen = new module.OutputScreen({
+                model: model,
+                el: $('.screen-output')
+            }),
+            splitsButtonView = new module.SplitsButtonView({
+                model: model,
+                el: $('div[data-content="btn-splits"]')
+            }),
+            percentageButtonView = new module.PercentageButtonView({
+                model: model,
+                el: $('div[data-content="btn-percentage"]')
+            }),
+            commonButtonView = new module.CommonButtonView({
+                model: model,
+                el: $('div[data-content="btn-common"]')
+            });
     } else {
         $('.overlay').addClass('active');
-    }
-
-    /* Support functions */
-    // iPhone or iPod
-    function isIOSMobile(userAgent) {
-        return userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipod') !== -1;
-    }
-
-    // check if it is under development envrionment
-    function isDev() {
-        return window.location.href.indexOf('rexren.com') === -1;
-    }
-
-    // check if it is launched from home screen
-    function isStandAlone(userAgent) {
-        return ('standalone' in window.navigator &&
-                window.navigator.standalone &&
-                isIOSMobile(userAgent)) 
-    }
-
-    function hideAddressBar() {
-        if (document.height <= window.outerHeight + 10) {
-            document.body.style.height = (window.outerHeight + 60) + 'px';
-            setTimeout(function() {window.scrollTo(0, 1);}, 50);
-        } else {
-            setTimeout(function() {window.scrollTo(0, 1);}, 0);
-        }
     }
 });
