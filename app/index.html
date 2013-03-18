@@ -15,6 +15,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon.png" />
 
 <!--        <link rel="stylesheet" href="styles/main.css">-->
+        <link rel="stylesheet" href="styles/normalize.css">
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/add2home.css">
         <script src="scripts/vendor/modernizr.min.js"></script>
@@ -29,7 +30,15 @@
         <article id="notification"></article>
         <article class="overlay"><h3>Heya, Tipper is a simple tip calculator designed specific for iOS Device</h3><p>Visit this page from your iOS device and install it on your Home Screen</p></article> 
         <article class="editing-overlay"></article>
+        <article id="settings">
+            <h3>Coming soon..</h3>
+        </article>
+        
         <article id="tipper">
+            <header>
+                <i class="pull-right icon-settings"></i>
+                <h3>Tipper</h3>
+            </header>
             <section>
                 <div class="display" data-role="input">
                     <div class="screen screen-input">
@@ -46,9 +55,11 @@
             
             <section class="dailpad">
                 <div data-content="btn-splits" class="btn-standout">
-                    <div class="btn btn-gray btn-blue" data-role="total" style="margin-right: 2%"><img alt="icon-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMRExkofaTzsAAAAHtJREFUKM+tkrENgDAMBG1ET4vEMIzISLBJdmCAPxoEIjgKIK6KIvtj/8fsL4AOmDmZga7aKGkhQ9KS13nwIpGgu19qm68r/dcoaX1yF9Hn5phZXzUnMig35jYqMAIpEErAWAp9os50+Qy74lPSsWMp9BLu7u1+GN7muAFyfbviihwPBAAAAABJRU5ErkJggg==" /></div>
+                    <div class="btn btn-gray btn-blue" data-role="total" style="margin-right: 2%">
+                        <i class="icon-user"></i>
+                    </div>
                     <div class="btn btn-col2 btn-gray" data-role="splits" data-update="target">
-                        <span class="input-splits blink">_</span><img alt="icon-image" class="js-toggle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMRExkofaTzsAAAAHtJREFUKM+tkrENgDAMBG1ET4vEMIzISLBJdmCAPxoEIjgKIK6KIvtj/8fsL4AOmDmZga7aKGkhQ9KS13nwIpGgu19qm68r/dcoaX1yF9Hn5phZXzUnMig35jYqMAIpEErAWAp9os50+Qy74lPSsWMp9BLu7u1+GN7muAFyfbviihwPBAAAAABJRU5ErkJggg==" /><img alt="icon-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMRExkofaTzsAAAAHtJREFUKM+tkrENgDAMBG1ET4vEMIzISLBJdmCAPxoEIjgKIK6KIvtj/8fsL4AOmDmZga7aKGkhQ9KS13nwIpGgu19qm68r/dcoaX1yF9Hn5phZXzUnMig35jYqMAIpEErAWAp9os50+Qy74lPSsWMp9BLu7u1+GN7muAFyfbviihwPBAAAAABJRU5ErkJggg==" />
+                        <span class="input-splits blink">_</span><i class="icon-user js-toggle"></i><i class="icon-user"></i>
                     </div>
                 </div>
                 <div data-content="btn-percentage">

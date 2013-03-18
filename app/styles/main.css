@@ -1,6 +1,6 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 body {
-    font: 62.5% "Lucida Grande", Tahoma, Verdana, sans-serif;
+    font: 62.5% "Ubuntu Mono", Tahoma, Verdana, sans-serif;
     margin: 0;
     -webkit-text-size-adjust: none;
     -webkit-user-select: none;
@@ -17,10 +17,10 @@ body {
     background-color: #444;
     opacity:0;
     -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    -ms-transition: all 1s ease-in-out;
-    transition: all 0.5s ease-in-out;
+       -moz-transition: all 0.5s ease-in-out;
+         -o-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
 }
 
 .editing-overlay.active {
@@ -36,10 +36,10 @@ body {
     top:-100%;
     z-index:100;
     -webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    -ms-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
+       -moz-transition: all 1s ease-in-out;
+         -o-transition: all 1s ease-in-out;
+        -ms-transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out;
 }
 .overlay h3 {
     text-align:center;
@@ -61,11 +61,24 @@ body {
 }
 
 .overlay.active {
-            transform:translateY(100%);
-        -ms-transform:translateY(0);
-       -mox-transform:translateY(0);
-    -webkit-transform:translateY(100%);
-         -o-transform:translateY(0);
+            transform: translateY(100%);
+        -ms-transform: translateY(0);
+       -mox-transform: translateY(0);
+    -webkit-transform: translateY(100%);
+         -o-transform: translateY(0);
+}
+
+#settings {
+    position: absolute;
+    height: 600px;
+    width: 87%;
+    left: 14%;
+    background: #3d4543;
+}
+
+#settings > h3 {
+    text-align: center;
+    color: white;
 }
 
 #notification {
@@ -95,11 +108,43 @@ body {
     background-image: -o-linear-gradient(top, #3d4543, #2f2a2f);
     background-image: linear-gradient(to bottom, #3d4543, #2f2a2f);
     -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);}
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
+    -webkit-transition: all 0.2s ease-in-out;
+       -moz-transition: all 1s ease-in-out;
+         -o-transition: all 1s ease-in-out;
+        -ms-transition: all 1s ease-in-out;
+            transition: all 0.2s ease-in-out;
+}
+
+#tipper.slideleft {
+        transform:translateX(-86%);
+    -ms-transform:translateX(-86%);
+   -mox-transform:translateX(-86%);
+-webkit-transform:translateX(-86%);
+     -o-transform:translateX(-86%);
+}
 
 section {
 	position: relative;
     overflow: hidden;
+}
+
+header {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -box-sizing: border-box;
+    height: 36px;
+    display: block;
+    overflow: hidden;
+}
+
+header > h3 {
+    color: rgba(0, 0, 0, 0.6);
+    font: 2em "Ubuntu Mono", monospace;
+    font-weight: bold;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    margin: 0;
 }
 
 .label {
@@ -117,7 +162,6 @@ section {
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
     color: #444;
     border-radius: 5px;
-    margin-top: 30px;
     overflow: hidden;
 }
 
@@ -396,7 +440,22 @@ section {
 }
 
 .icon-user {
-    background-position: -168px 0;
+    pointer-events: none;
+    line-height: 14px;
+    vertical-align: text-top;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMRFiU5YixoVgAAAPpJREFUOMvtlb0uhFEQhp937Q3IoFa5A3chRCkKjbgEcQmylV4tKnEZSp1CK9tgSiWv5ojNOvv95Nuodqo5k3mfmcxMcmBlxdSWkJlbwAQ4LqEb4DwiXpt04w7Fr4H9mfcJsA4cDO3YtXhENGpHXeZl2zV/MFhS1R8ELg2qz/g6gSVdVQpNljGKx8pYnpYBXpvfl+1W3bjhzEbAnu3T+YVJOsvMD+AuIj4733Fm7gK3wHbp2Pqlu+i+gBfgKCIeGsGZuQNcAodzkEXnLUnYvpd0ERHPi8BvwEYL8E+BkvseEZvV5dnuC/1pzkVbvwpJ057QGammq8/if+0bQcZZ+VJIThgAAAAASUVORK5CYII=);}
+
+.icon-settings {
+    position:absolute;
+    right: 0;
+    cursor: pointer;
+    height: 22px;
+    width: 22px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMRFxMBwvArigAAACRJREFUOMtjYBgFtAaMaPz/1DKTaTRsR8N4NIxHw3g0jIc3AACmzgQNZpQ6qwAAAABJRU5ErkJggg==);
 }
 
 .icon-thumb-up {

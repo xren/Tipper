@@ -13,11 +13,14 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             self.notificationEl = self.$el.find('#notification');
             self.tipperEl = self.$el.find('#tipper');
             self.editingOverlayEl = self.$el.find('.editing-overlay');
-            
+            self.settingsIconEl = self.$el.find('.icon-settings');
+
             self.tipperEl.on('touchmove', self.stopScrolling);
             self.tipperEl.on('touchstart', self.stopScrolling);
             self.editingOverlayEl.on('touchmove', self.stopScrolling);
             self.editingOverlayEl.on('touchstart', self.stopScrolling);
+
+            self.settingsIconEl.hammer().on(touchMethod, function(e) {self.settingsTapped(e);});
             
             self.listenTo(self.model, 'change:splitsEditing', self.changeSplitEditing);
 
@@ -27,6 +30,14 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             appCache.addEventListener('progress', function(e) {self.onCacheEvent(e);});
             appCache.addEventListener('updateready', function(e) {self.onCacheEvent(e);});
             appCache.addEventListener('error', function(e) {self.onCacheEvent(e);});
+        },
+        
+        settingsTapped: function(e) {
+            if (this.tipperEl.hasClass('slideleft')) {
+                this.tipperEl.removeClass('slideleft');
+            } else {
+                this.tipperEl.addClass('slideleft');
+            }
         },
 
         stopScrolling: function(e) {
@@ -74,8 +85,9 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             this.notificationEl.text('Update failed! Please restart Tipper.');
             console.log(e, 'error');
         },
-
     });
+    
+    
     var Model = Backbone.Model.extend({
         defaults : {
             bill: '0',
