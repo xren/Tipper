@@ -31,7 +31,7 @@ require(['add2home']);
 // });
 require(['util', 'tipper'], function(utils, module) {
  var userAgent = navigator.userAgent.toLowerCase();
-    if (util.isDev() || util.isIOSMobile(userAgent)) {
+    if (util.isDev() || util.isIOSMobile(userAgent) || util.isLab()) {
         var model = new module.Model({slient: true}),
             app = new module.App({
                 model: model,
@@ -56,8 +56,12 @@ require(['util', 'tipper'], function(utils, module) {
             commonButtonView = new module.CommonButtonView({
                 model: model,
                 el: $('div[data-content="btn-common"]')
+            }),
+            settingsView = new module.SettingsView({
+                model: model,
+                el: $('#settings')
             });
-        if (!window.navigator.standalone) {
+        if (!window.navigator.standalone && util.isIOSMobile(userAgent)) {
             util.hideAddressBar();
         }
     } else {

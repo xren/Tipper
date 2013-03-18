@@ -6,6 +6,19 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
         touchMethod = 'touchstart';
     }
 
+    var SettingsView = Backbone.View.extend({
+        initialize: function() {
+            var self = this;
+
+            this.$el.on('touchmove', self.stopScrolling);
+            this.$el.on('touchstart', self.stopScrolling);
+        },
+
+        stopScrolling: function(e) {
+            e.preventDefault();
+        }
+    });
+
     var App = Backbone.View.extend({
         initialize: function() {
             var self = this;
@@ -20,6 +33,8 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             self.editingOverlayEl.on('touchmove', self.stopScrolling);
             self.editingOverlayEl.on('touchstart', self.stopScrolling);
 
+            self.tipperEl.hammer().on('dragleft', function(e) {self.doubletap(e);});
+
             self.settingsIconEl.hammer().on(touchMethod, function(e) {self.settingsTapped(e);});
             
             self.listenTo(self.model, 'change:splitsEditing', self.changeSplitEditing);
@@ -30,6 +45,10 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             appCache.addEventListener('progress', function(e) {self.onCacheEvent(e);});
             appCache.addEventListener('updateready', function(e) {self.onCacheEvent(e);});
             appCache.addEventListener('error', function(e) {self.onCacheEvent(e);});
+        },
+
+        doubletap: function(e) {
+            alert('d');
         },
         
         settingsTapped: function(e) {
@@ -630,6 +649,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
         OutputScreen: OutputScreen,
         SplitsButtonView: SplitsButtonView,
         PercentageButtonView: PercentageButtonView,
-        CommonButtonView: CommonButtonView
+        CommonButtonView: CommonButtonView,
+        SettingsView: SettingsView
     }
 });

@@ -92,6 +92,11 @@
             return window.location.href.indexOf('rexren.com') === -1;
         },
 
+        isLab: function() {
+            return window.location.href.indexOf('rexren.com') !== -1 &&
+                   window.location.href.indexOf('lab') !== -1;
+        },
+
         // check if it is launched from home screen
         isStandAlone: function(userAgent) {
             return ('standalone' in window.navigator &&
