@@ -35,6 +35,7 @@ require(['util', 'tipper'], function(utils, module) {
         var model = new module.Model({slient: true}),
             app = new module.App({
                 model: model,
+                appVersion: '0.7.1',
                 el: $('body')
             }),
             inputScreen = new module.InputScreen({

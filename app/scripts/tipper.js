@@ -2,6 +2,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
     'use strict';
 
     var touchMethod = 'tap';
+    
     if (Modernizr.touch) {
         touchMethod = 'touchstart';
     }
@@ -21,8 +22,14 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
     var App = Backbone.View.extend({
         initialize: function() {
-            var self = this;
-
+            var self = this,
+                appCache = window.applicationCache;
+            
+            appCache.addEventListener('downloading', function(e) {self.onCacheEvent(e);});
+            appCache.addEventListener('progress', function(e) {self.onCacheEvent(e);});
+            appCache.addEventListener('updateready', function(e) {self.onCacheEvent(e);});
+            appCache.addEventListener('error', function(e) {self.onCacheEvent(e);});
+            
             self.notificationEl = self.$el.find('#notification');
             self.tipperEl = self.$el.find('#tipper');
             self.editingOverlayEl = self.$el.find('.editing-overlay');
@@ -38,17 +45,50 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             self.settingsIconEl.hammer().on(touchMethod, function(e) {self.settingsTapped(e);});
             
             self.listenTo(self.model, 'change:splitsEditing', self.changeSplitEditing);
-
-            var appCache = window.applicationCache;
             
-            appCache.addEventListener('downloading', function(e) {self.onCacheEvent(e);});
-            appCache.addEventListener('progress', function(e) {self.onCacheEvent(e);});
-            appCache.addEventListener('updateready', function(e) {self.onCacheEvent(e);});
-            appCache.addEventListener('error', function(e) {self.onCacheEvent(e);});
+            self.loadSettings(self.appVersion);
+        },
+        
+        loadSettings: function(appVersion) {
+            var settings = {
+                    seenTutorial: 'false'
+                },
+                updateSettings = {
+                    version: appVersion
+                }
+            
+            if (Modernizr.localstorage) {
+                var version = window.localStorage.getItem('version'),
+                    item;
+                if (!version) {
+                    // New user, never used tipper before
+                    // Give them all the setting items
+                    for (item in settings) {
+                        window.localStorage.setItem(item, settings[item]);
+                    }
+                    for (item in updateSettings) {
+                        window.localStorage.setItem(item, updateSettings[item]);
+                    }
+                } else if (version !== this.appVersion) {
+                    // Return user with version fall behind
+                    for (item in updateSettings) {
+                        window.localStorage.setItem(item, updateSettings[item]);
+                    }
+                } else {
+                    // Return user with lastest vesrion, cool!
+                    // Current do nothing
+                    return;
+                }
+            } else {
+                // Browser doesn't support localStorage, get it updated!!
+                return;
+            }
+            
+            // TODO: load actual settings
         },
 
         doubletap: function(e) {
-            alert('d');
+            return;
         },
         
         settingsTapped: function(e) {
@@ -67,10 +107,17 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             var editing = this.model.get('splitsEditing');
             
             if (editing) {
+                if (Modernizr.localstorage) {
+                    var seenTutorial = window.localStorage.getItem('seenTutorial');
+                    if (seenTutorial === 'true') {
+                        return;   
+                    }                    
+                    window.localStorage.setItem('seenTutorial', 'true');
+                }
                 this.editingOverlayEl.addClass('active');
             } else {
                 this.editingOverlayEl.removeClass('active');
-            }
+            }            
         },
 
         onCacheEvent: function(e) {
