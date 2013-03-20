@@ -23,6 +23,12 @@ body {
             transition: all 0.5s ease-in-out;
 }
 
+#img-split-bill {
+    position: absolute;
+    right: 40%;
+    top:30px;
+}
+
 .editing-overlay.active {
     opacity:0.8;
     z-index:15;
@@ -73,7 +79,7 @@ body {
 #settings {
     position: absolute;
     height: 100%;
-    width: 87%;
+    width: 88%;
     left: 14%;
     background: #3d4543;
 }
@@ -105,10 +111,10 @@ body {
     width: 100%;
     padding: 4.1%;
     background: #3d4543;
-    background-image: -webkit-linear-gradient(top, #3d4543, #2f2a2f);
-    background-image: -moz-linear-gradient(top, #3d4543, #2f2a2f);
-    background-image: -o-linear-gradient(top, #3d4543, #2f2a2f);
-    background-image: linear-gradient(to bottom, #3d4543, #2f2a2f);
+    background-image: -webkit-linear-gradient(top, #3d4543, #2f2d2f);
+    background-image: -moz-linear-gradient(top, #3d4543, #2f2d2f);
+    background-image: -o-linear-gradient(top, #3d4543, #2f2d2f);
+    background-image: linear-gradient(to bottom, #3d4543, #2f2d2f);
     -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
     -webkit-transition: all 0.2s ease-in-out;
@@ -480,6 +486,41 @@ header > h3 {
     -webkit-animation: blink ease-out 1s infinite;
     -moz-animation: blink 1s infinite;
     -o-animation: blink 1s infinite;
+}
+
+.settings-content {
+    margin: 0 0 0 -5px;
+    padding: 0 0 0 2%;
+}
+
+.li {
+    position: relative;
+    padding: 8px 0 8px 20px;
+    width: 100%;
+    min-height: 20px;
+    background: #3f3f3f;
+    background-image: -webkit-linear-gradient(top, #3f3f3f, #313131);
+    background-image: -moz-linear-gradient(top, #3f3f3f, #313131);
+    background-image: -o-linear-gradient(top, #3f3f3f, #313131);
+    background-image: linear-gradient(to bottom, #3f3f3f, #313131);
+    list-style-type: none;
+    color: #c9c9c9;
+    font: 1.6em "HelveticaNeue" monospace;
+    border-bottom: 1px solid #2e2d2d;
+}
+
+.li-primary {
+    font-weight: bold;
+    border-bottom: 1px solid #2e2d2d;
+}
+
+.li-content {
+    background: #484848;
+    background-image: -webkit-linear-gradient(top, #484848, #454545);
+    background-image: -moz-linear-gradient(top, #484848, #454545);
+    background-image: -o-linear-gradient(top, #484848, #454545);
+    background-image: linear-gradient(to bottom, #484848, #454545);
+    box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.1);
 }
 
 @-webkit-keyframes blink {

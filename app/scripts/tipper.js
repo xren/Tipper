@@ -33,7 +33,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             self.notificationEl = self.$el.find('#notification');
             self.tipperEl = self.$el.find('#tipper');
             self.editingOverlayEl = self.$el.find('.editing-overlay');
-            self.settingsIconEl = self.$el.find('.icon-settings');
+            // self.settingsIconEl = self.$el.find('.icon-settings');
 
             self.tipperEl.on('touchmove', self.stopScrolling);
             self.tipperEl.on('touchstart', self.stopScrolling);
@@ -42,7 +42,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
             self.tipperEl.hammer().on('dragleft', function(e) {self.doubletap(e);});
 
-            self.settingsIconEl.hammer().on(touchMethod, function(e) {self.settingsTapped(e);});
+            // self.settingsIconEl.hammer().on(touchMethod, function(e) {self.settingsTapped(e);});
             
             self.listenTo(self.model, 'change:splitsEditing', self.changeSplitEditing);
             
@@ -383,7 +383,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             self.listenTo(this.model, 'validate:editingConfirm', self.validateEditingConfirm);
             self.listenTo(this.model, 'update:splits', self.updateSplits);
 
-            self.totalButtonEl.hammer().on(touchMethod, function(e) {self.totalTapped(e);});
+            self.totalButtonEl.hammer().on(touchMethod, function(e) {self.totalTapped();});
             self.splitsButtonEl.hammer().on(touchMethod, function(e) {self.splitsTapped(e);});  
         },
 
@@ -397,6 +397,13 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
             if (editing) {
                 if (value === '_') {
+                    // If there's no split inputs and user taped C
+                    // same as cancel to total mode
+                    if (currentSplits === '_') {
+                        this.totalTapped();
+                        return;
+                    }
+
                     currentSplits = '_';
                     if (!this.inputEl.hasClass('blink')) {
                         this.inputEl.addClass('blink');
@@ -463,7 +470,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             }
         },
 
-        totalTapped: function(e) {
+        totalTapped: function() {
             this.model.changeDisplayMode('total');
         },
 
