@@ -132,12 +132,15 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 case 'progress':
                     var progress = Math.round(e.loaded / e.total * 100).toString();
                     this.notificationEl.text('Updating on progress: ' + progress + '%');
-                    break;
-                case 'updateready':
-                    var action = window.navigator.standalone ? 'Restart' : 'Refresh',
-                        notification = 'Complete! ' + action + ' Tipper and enjoy :)';
-                    
-                    this.notificationEl.text(notification);
+                    if (progress == '100') {
+                        // refresh the app when app finish updating
+                        // not using the updateready event because it sometimes not being fired correctly
+                        var action = window.navigator.standalone ? 'restarting..' : 'Refresh..',
+                            notification = 'Complete! Tipper is ' + action ;
+                        
+                        this.notificationEl.text(notification);
+                        window.location.href = window.location.href;
+                    }
                     break;
                 default:
                     if (this.notificationEl.hasClass('active')) {
