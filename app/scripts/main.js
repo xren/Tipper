@@ -62,8 +62,19 @@ require(['util', 'tipper'], function(utils, module) {
                 model: model,
                 el: $('#settings')
             });
-        if (!window.navigator.standalone && util.isIOSMobile(userAgent)) {
-            util.hideAddressBar();
+
+        if (util.isIOSMobile(userAgent)) {
+            // TODO: Refactor this!!
+            if (window.navigator.standalone && 
+                (window.location.href.indexOf('rexren.com/apps/tipper') !== -1 || 
+                    window.location.href.indexOf('rexren.com/tipper') !== -1)) {
+                if (_gaq) {
+                    console.log('standalone app yay!');
+                    _gaq.push(['_trackEvent', 'User', 'Open', 'open - ios - standalone']);
+                }
+            } else {
+                util.hideAddressBar();
+            }
         }
     } else {
         $('.overlay').addClass('active');

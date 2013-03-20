@@ -2,7 +2,7 @@
 header("Content-Type: text/cache-manifest");
 ?>
 CACHE MANIFEST
-# 2013-3-17: v0.7.3.3
+# 2013-3-17: v0.7.3.6
 
 CACHE:
 index.html
