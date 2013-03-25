@@ -29,7 +29,8 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
             appCache.addEventListener('progress', function(e) {self.onCacheEvent(e);});
             appCache.addEventListener('updateready', function(e) {self.onCacheEvent(e);});
             appCache.addEventListener('error', function(e) {self.onCacheEvent(e);});
-            
+            appCache.addEventListener('obsolete', function(e) {self.onCacheEvent(e);});
+
             self.notificationEl = self.$el.find('#notification');
             self.tipperEl = self.$el.find('#tipper');
             self.editingOverlayEl = self.$el.find('.editing-overlay');
@@ -137,11 +138,19 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                         // not using the updateready event because it sometimes not being fired correctly
                         var action = window.navigator.standalone ? 'restarting..' : 'Refresh..',
                             notification = 'Complete! Tipper is ' + action ;
-                        
+                        var appCache = window.applicationCache;
+
                         this.notificationEl.text(notification);
                         window.location.href = window.location.href;
+                        appCache.swapCache();
                     }
                     break;
+                case 'obsolete':
+                case 'error':
+                    var appCache = window.applicationCache;
+                    appCache.update();
+                    break;
+
                 default:
                     if (this.notificationEl.hasClass('active')) {
                         this.notificationEl.removeClass('active');

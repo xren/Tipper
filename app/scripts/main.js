@@ -35,7 +35,7 @@ require(['util', 'tipper'], function(utils, module) {
         var model = new module.Model({slient: true}),
             app = new module.App({
                 model: model,
-                appVersion: '0.7.1',
+                appVersion: '0.8.1',
                 el: $('body')
             }),
             inputScreen = new module.InputScreen({
@@ -65,14 +65,29 @@ require(['util', 'tipper'], function(utils, module) {
 
         if (util.isIOSMobile(userAgent)) {
             // TODO: Refactor this!!
-            if (window.navigator.standalone && 
-                (window.location.href.indexOf('rexren.com/apps/tipper') !== -1 || 
-                    window.location.href.indexOf('rexren.com/tipper') !== -1)) {
-                if (_gaq) {
+            if (window.navigator.standalone) {
+                if (_gaq && 
+                    (window.location.href.indexOf('rexren.com/apps/tipper') !== -1 || 
+                     window.location.href.indexOf('rexren.com/tipper') !== -1)) {
                     console.log('standalone app yay!');
                     _gaq.push(['_trackEvent', 'User', 'Open', 'open - ios - standalone']);
                 }
             } else {
+                // Change the layout inorder to fit screen when open with safari
+                if ('screen' in window && window.screen.availHeight === 548) {
+                    // iPhone 5
+                    $('.btn').css({
+                        'padding-top': '0.6em',
+                        'padding-bottom': '1.8em'
+                    });
+                }  else {
+                    // iPhone < 5
+                    $('.btn').css({
+                        'padding-top': '0.4em',
+                        'padding-bottom': '1.6em'
+                    });
+                }
+                // Hide address bar in safari
                 util.hideAddressBar();
             }
         }
