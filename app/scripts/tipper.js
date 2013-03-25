@@ -142,13 +142,13 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
                         this.notificationEl.text(notification);
                         window.location.href = window.location.href;
-                        appCache.swapCache();
                     }
                     break;
                 case 'obsolete':
                 case 'error':
+                    //Fixme: ifinite loop
                     var appCache = window.applicationCache;
-                    appCache.update();
+                    // appCache.update();
                     break;
 
                 default:
