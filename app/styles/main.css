@@ -25,7 +25,7 @@ body {
 
 #img-split-bill {
     position: absolute;
-    right: 40%;
+    right: 35%;
     top: 7%;
 }
 
@@ -547,9 +547,15 @@ header > h3 {
 
 /* For iPhone < 5 */
 @media only screen and (device-aspect-ratio: 2/3) {
+    #img-split-bill {
+        right: 30%;
+        top: 2%;
+    }
+
     #tipper header {
         display: none;
     }
+
     .btn {
         padding-top: 0.6em;
         padding-bottom: 1.7em;
