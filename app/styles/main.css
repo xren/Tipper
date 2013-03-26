@@ -3,6 +3,7 @@ body {
     font: 62.5% "Ubuntu Mono", Tahoma, Verdana, sans-serif;
     margin: 0;
     -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
        -moz-user-select: -moz-none;
@@ -25,8 +26,8 @@ body {
 
 #img-split-bill {
     position: absolute;
-    right: 35%;
-    top: 7%;
+    right: 30%;
+    top: 2%;
 }
 
 .editing-overlay.active {
@@ -71,7 +72,7 @@ body {
 .overlay.active {
             transform: translateY(100%);
         -ms-transform: translateY(0);
-       -mox-transform: translateY(0);
+       -moz-transform: translateY(0);
     -webkit-transform: translateY(100%);
          -o-transform: translateY(0);
 }
@@ -117,19 +118,21 @@ body {
     background-image: linear-gradient(to bottom, #3d4543, #2f2d2f);
     -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
+       -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
     -webkit-transition: all 0.2s ease-in-out;
        -moz-transition: all 1s ease-in-out;
          -o-transition: all 1s ease-in-out;
         -ms-transition: all 1s ease-in-out;
             transition: all 0.2s ease-in-out;
     -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
            -box-sizing: border-box;
 }
 
 #tipper.slideleft {
         transform:translateX(-84%);
     -ms-transform:translateX(-84%);
-   -mox-transform:translateX(-84%);
+   -moz-transform:translateX(-84%);
 -webkit-transform:translateX(-84%);
      -o-transform:translateX(-84%);
 }
@@ -143,8 +146,9 @@ header {
     position: relative;
     -webkit-box-sizing: border-box;
     -box-sizing: border-box;
+    -moz-box-sizing: border-box;
     height: 36px;
-    display: block;
+    display: none;
     overflow: hidden;
 }
 
@@ -169,10 +173,13 @@ header > h3 {
     height: 86px;
     background: #222;
     padding: 3px;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
+       -moz-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
     color: #444;
     border-radius: 5px;
     overflow: hidden;
+    margin-top: 4px;
 }
 
 .pull-left {
@@ -218,7 +225,9 @@ header > h3 {
 }
 
 .screen {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -box-sizing: border-box;
+    -moz-box-sizing: border-box;
     text-align:right;
     color: #444;
     background: #bccd95;
@@ -243,6 +252,7 @@ header > h3 {
     color:#3a3a3a;
     -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
             box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
+       -moz-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .screen.screen-input.active {
@@ -265,6 +275,7 @@ header > h3 {
     font: 4em "Ubuntu Mono", monospace;
     -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
+       -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .display-aid {
@@ -294,7 +305,8 @@ header > h3 {
     width: 32%;
 	height: 24px;
     color: white;
-    padding: 0.8em 0 1.9em 0;
+    padding-top: 0.6em;
+    padding-bottom: 1.7em;
     margin: 2% 0% 0% 0%;
     font: 2em "Ubuntu Mono", monospace;
     text-decoration: none;
@@ -303,10 +315,13 @@ header > h3 {
     vertical-align: middle;
     border: 1px solid rgba(0, 0, 0, 0.8);
     border-radius: 3px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);    
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);    
+    -webkit-box-shadow:inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+       -moz-box-shadow:inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);    
     background: #313131;
     background-clip: padding-box !important;  
     background-image: -webkit-linear-gradient(top, #313131, #1c1c1c);
+    background-image: -moz-linear-gradient(top, #313131, #1c1c1c);
     background-image: linear-gradient(top, #313131, #1c1c1c);
     cursor: pointer;
     -webkit-box-sizing: border-box;
@@ -330,7 +345,8 @@ header > h3 {
 .btn:active {
     background: #282828;
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+       -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .btn.center {
@@ -355,8 +371,9 @@ header > h3 {
 
 .btn-gray:active {
     background: #555;
+       -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .btn-pink {
@@ -370,7 +387,9 @@ header > h3 {
 .btn-pink:active {
     background: #c15d5d;
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
 }
 
 .btn-red {
@@ -384,7 +403,8 @@ header > h3 {
 .btn-red:active {
     background: #ff4848;
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+       -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .btn-yellow {
@@ -411,6 +431,7 @@ header > h3 {
     background: #354451;
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .btn.updating {
@@ -425,6 +446,7 @@ header > h3 {
   background: #677a89;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
           box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .btn-block {
@@ -521,6 +543,8 @@ header > h3 {
     background-image: -o-linear-gradient(top, #484848, #454545);
     background-image: linear-gradient(to bottom, #484848, #454545);
     box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.1);
+    -moz-box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.1);
 }
 
 @-webkit-keyframes blink {
@@ -543,6 +567,22 @@ header > h3 {
     0% {opacity: 1;}
     50% {opacity: 1; }
     100% {opacity: 0;}
+}
+
+@media only screen and (max-height: 480) {
+    #img-split-bill {
+        right: 30%;
+        top: 2%;
+    }
+
+    #tipper header {
+        display: none;
+    }
+
+    .btn {
+        padding-top: 0.6em;
+        padding-bottom: 1.7em;
+    }
 }
 
 /* For iPhone < 5 */

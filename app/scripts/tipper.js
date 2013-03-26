@@ -101,6 +101,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
         },
 
         stopScrolling: function(e) {
+            console.log(e);
             e.preventDefault();
         },
         
@@ -122,26 +123,22 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
         },
 
         onCacheEvent: function(e) {
-            if (!this.notificationEl.hasClass('active')) {
-                this.notificationEl.addClass('active');
-            }
+            // if (!this.notificationEl.hasClass('active')) {
+            //     this.notificationEl.addClass('active');
+            // }
             
             switch(e.type) {
                 case 'downloading':
-                    this.notificationEl.text('New Update Available');
+                    // this.notificationEl.text('New Update Available');
                     break;
                 case 'progress':
-                    var progress = Math.round(e.loaded / e.total * 100).toString();
-                    this.notificationEl.text('Updating on progress: ' + progress + '%');
-                    if (progress == '100') {
-                        // refresh the app when app finish updating
-                        // not using the updateready event because it sometimes not being fired correctly
-                        var action = window.navigator.standalone ? 'restarting..' : 'Refresh..',
-                            notification = 'Complete! Tipper is ' + action ;
-                        var appCache = window.applicationCache;
-
-                        this.notificationEl.text(notification);
-                        window.location.href = window.location.href;
+                    // this.notificationEl.text('Updating Tipper...Please wait');  
+                    break;
+                case 'updateready':
+                    window.applicationCache.swapCache();
+                    location.reload();
+                    if (this.notificationEl.hasClass('active')) {
+                        this.notificationEl.removeClass('active');
                     }
                     break;
                 case 'obsolete':

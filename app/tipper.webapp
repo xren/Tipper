@@ -1,0 +1,19 @@
+{
+    "name": "Tipper",
+    "description": "Tip calculator for humans",
+    "launch_path": "ffos/tipper/",
+    "icons": {
+        "128": "ffos/tipper/images/icon-128.png"
+    },
+    "developer": {
+        "name": "Xiaoxiang Ren",
+        "url": "http://rexren.com"
+    },
+    "default_locale": "en",
+    "fullscreen": "true",
+    "orientation": [
+        "portrait"
+    ],
+    "version": "0.9.0",
+    "appcache_path": "ffos/tipper/tipper.appcache"
+}
