@@ -179,7 +179,7 @@ header > h3 {
     color: #444;
     border-radius: 5px;
     overflow: hidden;
-    margin-top: 4px;
+    margin-top: 16px;
 }
 
 .pull-left {
@@ -240,7 +240,7 @@ header > h3 {
 .screen.screen-input {
     margin: 0 1px;
     clear: left;
-    padding: 0 6px;
+    padding: 2px 6px;
     border-top: 1px solid #222222;
     border-left: 1px solid #222222;
     border-right: 1px solid #222222;
@@ -266,7 +266,7 @@ header > h3 {
 .screen.screen-output {
     margin: 0 1px;
     height: 50px;
-    padding: 4px 3px;
+    padding: 8px 3px;
     border-bottom: 1px solid #222222;
     border-left: 1px solid #222222;
     border-right: 1px solid #222222;
@@ -306,7 +306,7 @@ header > h3 {
 	height: 24px;
     color: white;
     padding-top: 0.6em;
-    padding-bottom: 1.7em;
+    padding-bottom: 1.6em;
     margin: 2% 0% 0% 0%;
     font: 2em "Ubuntu Mono", monospace;
     text-decoration: none;
@@ -478,7 +478,7 @@ header > h3 {
     display: inline-block;
     width: 22px;
     height: 22px;
-    margin-top: 1px;
+    margin-top: -1px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMRFiU5YixoVgAAAPpJREFUOMvtlb0uhFEQhp937Q3IoFa5A3chRCkKjbgEcQmylV4tKnEZSp1CK9tgSiWv5ojNOvv95Nuodqo5k3mfmcxMcmBlxdSWkJlbwAQ4LqEb4DwiXpt04w7Fr4H9mfcJsA4cDO3YtXhENGpHXeZl2zV/MFhS1R8ELg2qz/g6gSVdVQpNljGKx8pYnpYBXpvfl+1W3bjhzEbAnu3T+YVJOsvMD+AuIj4733Fm7gK3wHbp2Pqlu+i+gBfgKCIeGsGZuQNcAodzkEXnLUnYvpd0ERHPi8BvwEYL8E+BkvseEZvV5dnuC/1pzkVbvwpJ057QGammq8/if+0bQcZZ+VJIThgAAAAASUVORK5CYII=);
 }
 
