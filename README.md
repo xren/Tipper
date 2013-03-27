@@ -7,4 +7,4 @@ Check out the online running [Demo]
 
 Best view on iPhone(iPod Touch)
 
-[Demo]: http://rexren.com/apps/tipper
+[Demo]: http://rexren.com/tipper
