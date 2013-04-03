@@ -1,7 +1,17 @@
 define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
     'use strict';
-
-    var touchMethod = 'tap';
+    var touchMethod = 'tap',
+        errorMessage = {
+            incorrectBill: 'Incorrect Bill',
+            incorrectMode: 'Incorrect Mode',
+            incorrectPercentage: 'Incorrect Percentage',
+            incorrectSplits: 'Incorrect Splists',
+            incorrectTotal: 'Incorrect Total',
+            incorrectEditingStatus: 'Incorrect Editing Status',
+            incorrectTipTotal: 'Incorrect Tip Total',
+            billGreaterThanTotal: 'Incorrect Value. Bill greater than Total',
+            nanError: 'NaN Error',
+        };
     
     if (Modernizr.touch) {
         touchMethod = 'touchstart';
@@ -149,6 +159,9 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                     //Fixme: ifinite loop
                     var appCache = window.applicationCache;
                     // appCache.update();
+                    if (this.notificationEl.hasClass('active')) {
+                        this.notificationEl.removeClass('active');
+                    }
                     break;
 
                 default:
@@ -181,7 +194,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         changeEditing: function(isEditing) {
             if (isEditing !== true && isEditing !== false) {
-                throw 'Incorrect editing status';
+                throw errorMessage.incorrectEditingStatus;
             }
 
             this._setAttr('splitsEditing', isEditing);
@@ -189,7 +202,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         changeDisplayMode: function(mode) {
             if (mode !== 'total' && mode !== 'each') {
-                throw 'Incorrect mode';
+                throw errorMessage.incorrectMode;
             }
             // alert('ready to set mode');
             this._setAttr('displayMode', mode);
@@ -198,7 +211,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         changePercentage: function(percentage) {
             if (!util.isInt(percentage)) {
-                throw 'Incorrect percentage';
+                throw errorMessage.incorrectPercentage;
             }
 
             this._setAttr('percentage', percentage.toString());
@@ -208,7 +221,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         changeSplits: function(splits) {
             if (!util.isInt(splits)) {
-                throw 'Incorrect splits';
+                throw errorMessage.incorrectSplits;
             }
             this._setAttr('splits', splits.toString());
             this.updateAll();
@@ -217,7 +230,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         changeBill: function(bill) {
             if (!util.isNumber(bill)) {
-                throw 'Incorrect bill';
+                throw errorMessage.incorrectBill;
             }
 
             this._setAttr('bill', bill.toString());
@@ -227,15 +240,15 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         calcTotal: function(bill, percentage) {
             if (!util.isNumber(bill) || !util.isInt(percentage)) {
-                throw 'NaN Error';
+                throw errorMessage.nanError;
             }
 
             if (bill < 0) {
-                throw 'Incorrect bill';
+                throw errorMessage.incorrectBill;
             }
 
             if (percentage < 0) {
-                throw 'Incorrect percentage';
+                throw errorMessage.incorrectPercentage;
             }
 
             return (bill * (1 + percentage / 100)).toFixed(2);
@@ -243,19 +256,19 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         calcTipTotal: function(bill, total) {
             if (!util.isNumber(bill) || !util.isNumber(total)) {
-                throw 'NaN Error';
+                throw errorMessage.nanError;
             }
 
             if (bill < 0) {
-                throw 'Incorrect bill';
+                throw errorMessage.incorrectBill;
             }
 
             if (total < 0) {
-                throw 'Incorrect total';
+                throw errorMessage.incorrectTotal;
             }
 
             if (bill > total) {
-                throw 'Incorrect value. Bill greater than total'
+                throw errorMessage.billGreaterThanTotal;
             }
 
             return (total - bill).toFixed(2);
@@ -263,15 +276,15 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         calcEachTotal: function(total, splits) {
             if (!util.isNumber(total) || !util.isInt(splits)) {
-                throw 'NaN Error';
+                throw errorMessage.nanError;
             }
 
             if (total < 0) {
-                throw 'Incorrect total';
+                throw errorMessage.incorrectTotal;
             }
 
             if (splits < 1) {
-                throw 'Incorrect splits';
+                throw errorMessage.incorrectSplits;
             }
 
             var result = (total / splits).toFixed(2);
@@ -281,15 +294,15 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         calcEachTip: function(tipTotal, splits) {
             if (!util.isNumber(tipTotal) || !util.isInt(splits)) {
-                throw 'NaN Error';
+                throw errorMessage.nanError;
             }
 
             if (tipTotal < 0) {
-                throw 'Incorrect tipTotal';
+                throw errorMessage.incorrectTipTotal;
             }
 
             if (splits < 1) {
-                throw 'Incorrect splits';
+                throw errorMessage.incorrectSplits;
             }
             
             return (tipTotal / splits).toFixed(2);
@@ -401,7 +414,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
 
         updateSplits: function(value) {
             if (!util.isInt(value) && value !== '_') {
-                throw "Incorrect splits value";
+                throw errorMessage.incorrectSplits;
             }
 
             var editing = this.model.get('splitsEditing'),
@@ -492,7 +505,7 @@ define(['hammer', 'jqueryhammer', 'cookie', 'util', 'modernizr'], function() {
                 this.model.changeEditing(false);
             } else {
                 // TODO: need response
-                console.error('invalid splits');
+                console.error(errorMessage.incorrectSplits);
             }
         },
 

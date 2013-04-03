@@ -1,7 +1,7 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 body {
-    font: 62.5% "Ubuntu Mono", Tahoma, Verdana, sans-serif;
     margin: 0;
+    font: 62.5% "Ubuntu Mono", Tahoma, Verdana, sans-serif;
     -webkit-text-size-adjust: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -18,86 +18,86 @@ body {
     opacity:0;
     -webkit-transition: all 0.5s ease-in-out;
        -moz-transition: all 0.5s ease-in-out;
-         -o-transition: all 0.5s ease-in-out;
         -ms-transition: all 0.5s ease-in-out;
+         -o-transition: all 0.5s ease-in-out;
             transition: all 0.5s ease-in-out;
 }
 
 #img-split-bill {
     position: absolute;
-    right: 35%;
     top: 7%;
+    right: 35%;
 }
 
 .editing-overlay.active {
-    opacity:0.8;
     z-index:15;
+    opacity:0.8;
 }
 
 .overlay {
     position:absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #454345;
     top:-100%;
     z-index:100;
+    width: 100%;
+    height: 100%;
+    background-color: #454345;
     -webkit-transition: all 1s ease-in-out;
        -moz-transition: all 1s ease-in-out;
-         -o-transition: all 1s ease-in-out;
         -ms-transition: all 1s ease-in-out;
+         -o-transition: all 1s ease-in-out;
             transition: all 1s ease-in-out;
 }
 
 .overlay h3 {
-    text-align:center;
-    vertical-align: middle;
-    color: white;
-    font-size: 2em;
-    top: 20%;
     position: absolute;
+    top: 20%;
     width: 100%;
+    color: white;
+    vertical-align: middle;
+    text-align:center;
+    font-size: 2em;
 }
 
 .overlay p {
-    text-align:center;
-    vertical-align: middle;
-    color: white;
-    font-size: 1.6em;
-    top: 40%;
     position: absolute;
+    top: 40%;
     width: 100%;
+    color: white;
+    vertical-align: middle;
+    text-align:center;
+    font-size: 1.6em;
 }
 
 .overlay.active {
-            transform: translateY(100%);
-        -ms-transform: translateY(0);
-       -mox-transform: translateY(0);
     -webkit-transform: translateY(100%);
+        -ms-transform: translateY(0);
          -o-transform: translateY(0);
+            transform: translateY(100%);
+       -mox-transform: translateY(0);
 }
 
 #settings {
     position: absolute;
-    height: 100%;
-    width: 88%;
     left: 14%;
+    width: 88%;
+    height: 100%;
     background: #3d4543;
 }
 
 #settings > h3 {
-    text-align: center;
     color: white;
+    text-align: center;
 }
 
 #notification {
     position: relative;
+    display: none;
+    padding: 3px;
     background: black;
     color: white;
-    font-size: 1.2em;
-    font-weight: bold;
     text-align: center;
-    padding: 3px;
-    display: none;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 #notification.active {
@@ -105,11 +105,12 @@ body {
 }
 
 #tipper {
-    display: block;
     position: relative;
-    height: 100%;
-    width: 100%;
+    display: block;
+    -webkit-box-sizing: border-box;
     padding: 4.1%;
+    width: 100%;
+    height: 100%;
     background: #3d4543;
     background-image: -webkit-linear-gradient(top, #3d4543, #2f2d2f);
     background-image: -moz-linear-gradient(top, #3d4543, #2f2d2f);
@@ -119,60 +120,59 @@ body {
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5);
     -webkit-transition: all 0.2s ease-in-out;
        -moz-transition: all 1s ease-in-out;
-         -o-transition: all 1s ease-in-out;
         -ms-transition: all 1s ease-in-out;
+         -o-transition: all 1s ease-in-out;
             transition: all 0.2s ease-in-out;
-    -webkit-box-sizing: border-box;
            -box-sizing: border-box;
 }
 
 #tipper.slideleft {
-        transform:translateX(-84%);
-    -ms-transform:translateX(-84%);
-   -mox-transform:translateX(-84%);
 -webkit-transform:translateX(-84%);
+    -ms-transform:translateX(-84%);
      -o-transform:translateX(-84%);
+        transform:translateX(-84%);
+   -mox-transform:translateX(-84%);
 }
 
 section {
-	position: relative;
+    position: relative;
     overflow: hidden;
 }
 
 header {
     position: relative;
-    -webkit-box-sizing: border-box;
-    -box-sizing: border-box;
-    height: 36px;
     display: block;
     overflow: hidden;
+    -webkit-box-sizing: border-box;
+    height: 36px;
+    -box-sizing: border-box;
 }
 
 header > h3 {
+    margin: 0;
     color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
     font: 2.5em "Ubuntu Mono", monospace;
     font-weight: bold;
-    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
-    text-align: center;
-    margin: 0;
 }
 
 .label {
-/*    height: 11px;*/
-    color: white;
+/* margin-bottom: 1px; */
     margin-left: 2px;
-/*    margin-bottom: 1px;*/
+/* height: 11px; */
+    color: white;
 }
 
 .display {
     position: relative;
-    height: 86px;
-    background: #222;
+    overflow: hidden;
     padding: 3px;
+    height: 86px;
+    border-radius: 5px;
+    background: #222;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08);
     color: #444;
-    border-radius: 5px;
-    overflow: hidden;
 }
 
 .pull-left {
@@ -192,19 +192,19 @@ header > h3 {
 }
 
 .info {
-    color: #444;
-    padding: 1px 2px;
+    clear: left;
     margin-top: 2px;
     margin-left: 2px;
+    padding: 1px 2px;
+    border-radius: 2px;
+    color: #444;
     font-weight: bold;
     font-size: 15px;
-    clear: left;
-    border-radius: 2px;
 }
 
 .info-bill {
-    color: #444;
     margin-left: 0px;
+    color: #444;
 }
 
 .info-total,
@@ -219,66 +219,66 @@ header > h3 {
 
 .screen {
     box-sizing: border-box;
-    text-align:right;
-    color: #444;
     background: #bccd95;
     background-image: -webkit-linear-gradient(top, #bccd95, #e0f5b1);
     background-image: -moz-linear-gradient(top, #bccd95, #e0f5b1);
     background-image: -o-linear-gradient(top, #bccd95, #e0f5b1);
     background-image: linear-gradient(to bottom, #bccd95, #e0f5b1);
+    color: #444;
+    text-align:right;
 }
 
 .screen.screen-input {
-    margin: 0 1px;
     clear: left;
+    margin: 0 1px;
     padding: 0 6px;
-    border-top: 1px solid #222222;
-    border-left: 1px solid #222222;
-    border-right: 1px solid #222222;
-    border-top-right-radius: 3px;
-    border-top-left-radius:3px;
     height: 35px;
+    border-top: 1px solid #222222;
+    border-right: 1px solid #222222;
+    border-left: 1px solid #222222;
+    border-top-left-radius:3px;
+    border-top-right-radius: 3px;
     background: #afbd8e;
-    font: 3.2em "Ubuntu Mono", monospace;
-    color:#3a3a3a;
     -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
             box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
+    color:#3a3a3a;
+    font: 3.2em "Ubuntu Mono", monospace;
 }
 
 .screen.screen-input.active {
     padding: 5% 2%;
     height: 53px;
-    font: 5.2em "Ubuntu Mono", monospace;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius:  3px;
+    font: 5.2em "Ubuntu Mono", monospace;
 }
 
 .screen.screen-output {
     margin: 0 1px;
-    height: 50px;
     padding: 4px 3px;
+    height: 50px;
+    border-right: 1px solid #222222;
     border-bottom: 1px solid #222222;
     border-left: 1px solid #222222;
-    border-right: 1px solid #222222;
-    border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    font: 4em "Ubuntu Mono", monospace;
+    border-bottom-left-radius: 3px;
     -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12);
+    font: 4em "Ubuntu Mono", monospace;
 }
 
 .display-aid {
-    font-size: 1em;
     position:absolute;
-    z-index: 5;
     top: auto;
     left: 1em;
-    padding: 5px 10px;
+    z-index: 5;
     margin: -1em 0;
+    padding: 5px 10px;
     border: 1px solid #6f6f6f;
+    border-radius: 3px;
     background-color: #6f6f6f;
     color: #fff;
-    border-radius: 3px;   
+    font-size: 1em;   
 }
 
 .dailpad {
@@ -291,32 +291,32 @@ header > h3 {
 .btn {
     position:relative;
     float: left;
-    width: 32%;
-	height: 24px;
-    color: white;
-    padding: 0.8em 0 1.9em 0;
-    margin: 2% 0% 0% 0%;
-    font: 2em "Ubuntu Mono", monospace;
-    text-decoration: none;
-    text-shadow:0 1px rgba(0, 0, 0, 0.4);
-	text-align: center;
-    vertical-align: middle;
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    border-radius: 3px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);    
-    background: #313131;
-    background-clip: padding-box !important;  
-    background-image: -webkit-linear-gradient(top, #313131, #1c1c1c);
-    background-image: linear-gradient(top, #313131, #1c1c1c);
-    cursor: pointer;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 2% 0% 0% 0%;
+    padding: 0.8em 0 1.9em 0;
+    width: 32%;
+    height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 3px;    
+    background: #313131;  
+    background-image: -webkit-linear-gradient(top, #313131, #1c1c1c);
+    background-image: linear-gradient(top, #313131, #1c1c1c);
+    background-clip: padding-box !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    text-shadow:0 1px rgba(0, 0, 0, 0.4);
+    font: 2em "Ubuntu Mono", monospace;
+    cursor: pointer;
 }
 
 .btn-col1 {
-    width: 100%;
     margin: 2% 0 0 0;
+    width: 100%;
 }
 
 .btn-col2 {
@@ -437,36 +437,36 @@ header > h3 {
 }
 
 .icon {
-    pointer-events: none;
-    line-height: 14px;
-    vertical-align: text-top;
     display: inline-block;
+    margin-top: 5px;
     width: 14px;
     height: 14px;
-    margin-top: 5px;
     background-image: url("../images/glyphicons-halflings-white.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
+    vertical-align: text-top;
+    line-height: 14px;
+    pointer-events: none;
 }
 
 .icon-user {
-    pointer-events: none;
-    line-height: 14px;
-    vertical-align: text-top;
     display: inline-block;
+    margin-top: 1px;
     width: 22px;
     height: 22px;
-    margin-top: 1px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMRFiU5YixoVgAAAPpJREFUOMvtlb0uhFEQhp937Q3IoFa5A3chRCkKjbgEcQmylV4tKnEZSp1CK9tgSiWv5ojNOvv95Nuodqo5k3mfmcxMcmBlxdSWkJlbwAQ4LqEb4DwiXpt04w7Fr4H9mfcJsA4cDO3YtXhENGpHXeZl2zV/MFhS1R8ELg2qz/g6gSVdVQpNljGKx8pYnpYBXpvfl+1W3bjhzEbAnu3T+YVJOsvMD+AuIj4733Fm7gK3wHbp2Pqlu+i+gBfgKCIeGsGZuQNcAodzkEXnLUnYvpd0ERHPi8BvwEYL8E+BkvseEZvV5dnuC/1pzkVbvwpJ057QGammq8/if+0bQcZZ+VJIThgAAAAASUVORK5CYII=);
+    vertical-align: text-top;
+    line-height: 14px;
+    pointer-events: none;
 }
 
 .icon-settings {
     position:absolute;
     right: 0;
-    cursor: pointer;
-    height: 28px;
     width: 28px;
+    height: 28px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMSBQcyXplFOQAAANFJREFUSMft1rFKA0EQBuBPsJML+gBKGgMhlaW+mHU0D5AmnXamTBksfAE7sbXUwiJFitSeNmdz7IHFDueR+2Fhl1nmZ2b+mV16dB0HifNhAM8XSgnnE6zxXV3KgWNc4y5FWOAsIMLT302d8BPLKsIyE9kRnv9Sz2i9tKPScUBKB7jFQ6qGJ7gICGzUJJoNnjK3RYHX/R1t51gEpHSOVcp4VZHlXjdNotniJaAt3v5lPUP810mGmAUM73s8poyXQaKZNolmh/eAB/ijtS9Gj+7jBwNuUmTnPYpsAAAAAElFTkSuQmCC);
+    cursor: pointer;
 }
 
 .icon-thumb-up {
@@ -482,10 +482,10 @@ header > h3 {
  }
 
 .blink {
-    animation: blink ease-out 1s infinite;
     -webkit-animation: blink ease-out 1s infinite;
     -moz-animation: blink 1s infinite;
     -o-animation: blink 1s infinite;
+    animation: blink ease-out 1s infinite;
 }
 
 .settings-content {
@@ -496,22 +496,22 @@ header > h3 {
 .li {
     position: relative;
     padding: 8px 0 8px 20px;
-    width: 100%;
     min-height: 20px;
+    width: 100%;
+    border-bottom: 1px solid #2e2d2d;
     background: #3f3f3f;
     background-image: -webkit-linear-gradient(top, #3f3f3f, #313131);
     background-image: -moz-linear-gradient(top, #3f3f3f, #313131);
     background-image: -o-linear-gradient(top, #3f3f3f, #313131);
     background-image: linear-gradient(to bottom, #3f3f3f, #313131);
-    list-style-type: none;
     color: #c9c9c9;
+    list-style-type: none;
     font: 1.6em "HelveticaNeue" monospace;
-    border-bottom: 1px solid #2e2d2d;
 }
 
 .li-primary {
-    font-weight: bold;
     border-bottom: 1px solid #2e2d2d;
+    font-weight: bold;
 }
 
 .li-content {
@@ -548,8 +548,8 @@ header > h3 {
 /* For iPhone < 5 */
 @media only screen and (device-aspect-ratio: 2/3) {
     #img-split-bill {
-        right: 30%;
         top: 2%;
+        right: 30%;
     }
 
     #tipper header {
@@ -561,5 +561,4 @@ header > h3 {
         padding-bottom: 1.7em;
     }
 }
-
 
